@@ -46,7 +46,7 @@
             "value": 0.6
         },
         "tooltip": [
-            {"field": "category_group", "type": "nominal", "title": "category"},
+            {"field": "category_group", "type": "nominal", "title": "Category"},
             {"aggregate": "count", "type": "quantitative", "title": "Items"}
         ]
     },
