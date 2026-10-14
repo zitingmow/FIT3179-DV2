@@ -3,16 +3,18 @@
     "width": "container",
     "height": 300,
     "projection": {
-        "type": "equalEarth",
-        "scale": 150,
-        "center":[70, 10]
+        "type": "mercator",
+        "scale": 90,
+        "center":[-10, 30]
     },
+    "background": "#AADAFF",
     "data": { "url": "https://raw.githubusercontent.com/zitingmow/FIT3179-DV2/main/data/nma_production_places.csv"},
     "transform": [
         {
             "filter": "datum.location_scope == 'Outside Australia' && isValid(datum.latitude)"
         },
-        {"aggregate": [
+        {
+            "aggregate": [
                 {
                     "op": "count", "as": "records"
                 },
@@ -37,6 +39,18 @@
             }
         },
         {
+            
+            "data": {
+                "url": "https://raw.githubusercontent.com/zitingmow/FIT3179-DV2/main/js/ne_110m_graticules_30.json",
+                "format": {"type": "topojson", "feature": "ne_110m_graticules_30"}
+            },
+            "mark":{
+                "type": "geoshape",
+                "stroke": "grey",
+                "opacity": 0.3
+            }
+        },
+        {
             "data": {
                 "url": "https://raw.githubusercontent.com/zitingmow/FIT3179-DV2/main/js/ne_110m_admin_0_countries.json",
                 "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
@@ -48,7 +62,7 @@
             },
             "transform": [
                 {
-                    "filter": "indexof(['United Kingdom', 'Germany', 'France', 'Netherlands', 'Belgium', 'Austria', 'Italy', 'Japan', 'Singapore', 'Malaysia', 'Indonesia', 'China', 'India', 'Greece', 'Switzerland', 'Australia'], datum.properties.NAME) > 0"
+                    "filter": "indexof(['United Kingdom', 'Germany', 'France', 'Netherlands', 'Belgium', 'Austria', 'Italy', 'Japan', 'Singapore', 'Malaysia', 'Indonesia', 'China', 'India', 'Greece', 'Switzerland', 'Australia', 'Scotland'], datum.properties.NAME) > 0"
                 }
             ]
         },
