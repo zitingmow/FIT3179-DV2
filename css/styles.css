@@ -153,6 +153,9 @@ h3 {
 }
 
 .arch-card{
+    border: 2px solid #0A1E5C;
+    border-radius: 240px 240px 20px 20px;
+    background-color: #FFECB3;
     padding: 30px 30px;
     margin-top: 10%;
     height: 85%;
