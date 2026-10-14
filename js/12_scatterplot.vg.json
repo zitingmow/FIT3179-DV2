@@ -1,0 +1,136 @@
+{
+    "$schema":"https://vega.github.io/schema/vega-lite/v5.json",
+    "data": {
+        "url": "https://raw.githubusercontent.com/zitingmow/FIT3179-DV2/main/data/commemorative_coins_stamps.csv"
+    },
+    "width": "container",
+    "height": 300,
+        "params": [
+        {
+            "name": "Theme_selection",
+            "bind": {
+                "input": "select",
+                "options": [
+                    null,
+                    "Arts & Culture",
+                    "Australian History",
+                    "Environment",
+                    "First Nations",
+                    "Military",
+                    "Royalty",
+                    "Sport",
+                    "Transport & Exploration"
+                ],
+                "labels": [
+                    "Show All",
+                    "Arts & Culture",
+                    "Australian History",
+                    "Environment",
+                    "First Nations",
+                    "Military",
+                    "Royalty",
+                    "Sport",
+                    "Transport & Exploration"
+                ],
+                "name": "Theme Selection: "
+            }
+        }
+    ],
+    "transform": [
+        {"filter": "datum.type == 'Coin' && isValid(datum.year) && isValid(datum['mintage (millions)'])"},
+        {"calculate": "toNumber(datum['mintage (millions)'])", "as": "mintage"},
+        {"filter": "Theme_selection == null || datum.theme == Theme_selection"}
+    ],
+    "layer":[
+        {
+            "transform":[
+                {
+                    "regression": "mintage",
+                    "on": "year",
+                    "method": "linear"
+                }
+            ],
+            "mark": {
+                "type": "line",
+                "color": "#253B66",
+                "strokeWidth": 2.5
+            },
+            "encoding": {
+                "x": {
+                    "field": "year",
+                    "type": "quantitative",
+                    "title": "Issue Year"
+                },
+                "y": {
+                    "field": "mintage",
+                    "type": "quantitative",
+                    "title": "Mintage (million)"
+                }
+            }
+        },
+        {
+            "mark": {
+                "type": "point",
+                "filled": true,
+                "size": 350,
+                "opacity": 0.7
+            },
+            "encoding": {
+                "x": {
+                    "field": "year",
+                    "type": "quantitative",
+                    "scale":{"zero": false},
+                    "axis": {
+                        "format": "d",
+                        "tickCount": 5
+                        
+                    }
+                },
+                "y": {
+                    "field": "mintage",
+                    "type": "quantitative",
+                    "axis": {
+                        "tickCount": 5
+                    }
+                },
+                "color" : {
+                    "field": "theme",
+                    "type": "nominal",
+                    "title": "Theme",
+                    "scale": {
+                        "range": [
+                            "#E3DAC9",
+                            "#C1B58F",
+                            "#A6F7F8",
+                            "#5D4037",
+                            "#B47CFF",
+                            "#FFD1DA",
+                            "#828282",
+                            "#C0C0C0"
+                        ]
+                    }
+                },
+                "tooltip": [
+                    {"field":"title", "type": "nominal", "title": "Issue"},
+                    {"field":"year", "type": "quantitative", "title": "Year", "format": "d"},
+                    {"field":"mintage", "type": "quantitative", "title": "Mintage", "format": ",.1f"},
+                    {"field":"theme", "type": "nominal", "title": "Theme"}
+                ]
+            }
+        }
+    ],
+    "config":{
+        "view":{"stroke":null},
+        "axis": {
+            "titleFont": "Plus Jakarta Sans", "titleFontWeight": "bold", "titlePadding": 10, 
+            "labelFont": "Plus Jakarta Sans", "labelFontSize": 10, "labelPadding": 5,
+            "grid": false
+        },
+        "legend":{
+            "orient": "bottom",
+            "titleFont": "Plus Jakarta Sans", "titleFontSize": 10, "titleColor":"#0D2B80",
+            "labelFont": "Plus Jakarta Sans", "labelFontSize": 9, "labelColor":"#0D2B80",
+            "symbolSize": 200
+        }
+    }
+}

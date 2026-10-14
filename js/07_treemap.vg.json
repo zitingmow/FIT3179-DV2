@@ -1,0 +1,113 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": "container",
+    "height": 250,
+    "data": {"url": "https://raw.githubusercontent.com/zitingmow/FIT3179-DV2/main/data/nma_collections.csv"},
+    "transform":[
+        {
+            "filter": "datum.collection_grouped != 'Other Collections'"
+        },
+        {
+            "aggregate": [{"op": "count", "as": "records"}],
+            "groupby": ["collection_grouped"]
+        },
+        {
+            "calculate": "datum.collection_grouped === 'Timothy Millett collection' ? 0 : datum.collection_grouped === 'Cecil Ballard Jnr collection' ? 0.52 : datum.collection_grouped === 'David Allen medals collection' ? 0.52 : datum.collection_grouped === 'William and Jeanette Derham Family - Bendigo Pottery collection' ? 0.77 : datum.collection_grouped === 'Gary Whipp collection' ? 0.52 : datum.collection_grouped === 'Governor-General collection' ? 0.77 : datum.collection_grouped === 'Diana Mary Bates collection' ? 0.52 : datum.collection_grouped === 'Springfield - Faithfull Family collection' ? 0.65 : datum.collection_grouped === 'J B Young Ltd collection' ? 0.78 : datum.collection_grouped === 'ACT Milk Authority collection' ? 0.89 : 0.52", 
+            "as": "final_fx"
+        },
+        {
+            "calculate": "datum.collection_grouped === 'Timothy Millett collection' ? 0.49 : datum.collection_grouped === 'Cecil Ballard Jnr collection' ? 1.0 : datum.collection_grouped === 'David Allen medals collection' ? 0.75 : datum.collection_grouped === 'William and Jeanette Derham Family - Bendigo Pottery collection' ? 1.0 : datum.collection_grouped === 'Gary Whipp collection' ? 0.75 : datum.collection_grouped === 'Governor-General collection' ? 1.0 : datum.collection_grouped === 'Diana Mary Bates collection' ? 0.63 : datum.collection_grouped === 'Springfield - Faithfull Family collection' ? 0.76 : datum.collection_grouped === 'J B Young Ltd collection' ? 0.87 : datum.collection_grouped === 'ACT Milk Authority collection' ? 1.0 : 1.0", 
+            "as": "fx2"
+        },
+        {
+            "calculate": "datum.collection_grouped === 'Timothy Millett collection' ? 0 : datum.collection_grouped === 'Cecil Ballard Jnr collection' ? 0 : datum.collection_grouped === 'David Allen medals collection' ? 0.38 : datum.collection_grouped === 'William and Jeanette Derham Family - Bendigo Pottery collection' ? 0.38 : datum.collection_grouped === 'Gary Whipp collection' ? 0.62 : datum.collection_grouped === 'Governor-General collection' ? 0.62 : datum.collection_grouped === 'Diana Mary Bates collection' ? 0.82 : datum.collection_grouped === 'Springfield - Faithfull Family collection' ? 0.82 : datum.collection_grouped === 'J B Young Ltd collection' ? 0.82 : datum.collection_grouped === 'ACT Milk Authority collection' ? 0.82 : 0", 
+            "as": "y"
+        },
+        {
+            "calculate": "datum.collection_grouped === 'Timothy Millett collection' ? 1.0 : datum.collection_grouped === 'Cecil Ballard Jnr collection' ? 0.35 : datum.collection_grouped === 'David Allen medals collection' ? 0.59 : datum.collection_grouped === 'William and Jeanette Derham Family - Bendigo Pottery collection' ? 0.59 : datum.collection_grouped === 'Gary Whipp collection' ? 0.79 : datum.collection_grouped === 'Governor-General collection' ? 0.79 : datum.collection_grouped === 'Diana Mary Bates collection' ? 1.0 : datum.collection_grouped === 'Springfield - Faithfull Family collection' ? 1.0 : datum.collection_grouped === 'J B Young Ltd collection' ? 1.0 : datum.collection_grouped === 'ACT Milk Authority collection' ? 1.0 : 1.0", 
+            "as": "y2"
+        },
+        {
+            "calculate": "(datum.final_fx + datum.fx2) / 2",
+            "as":"x_mid"
+        },
+        {
+            "calculate": "(datum.y + datum.y2) / 2",
+            "as":"y_mid"
+        },
+        {
+            "calculate": "replace(datum.collection_grouped, /\\s*collection$/i, '')",
+            "as": "label_name"
+        }
+    ],
+    "layer":[
+        {
+            "params":[
+                {
+                    "name": "group_highlight",
+                    "select": {
+                        "type": "point",
+                        "fields": ["collection_grouped"],
+                        "on": "mouseover",
+                        "clear": "mouseout"
+                    }
+                }
+            ],
+            "mark": {
+                "type": "rect",
+                "stroke": "white",
+                "strokeWidth": 1.5
+            },
+            "encoding": {
+                "x": {"field": "final_fx", "type": "quantitative", "axis": null},
+                "x2": {"field": "fx2"},
+                "y": {"field": "y", "type": "quantitative", "axis": null},
+                "y2": {"field": "y2"},
+                "color": {
+                    "condition": [
+                        {
+                            "test": "datum.collection_grouped == 'Timothy Millett collection'",
+                            "value": "#7B934A"
+                        },
+                        {
+                            "test": "datum.collection_grouped == 'Cecil Ballard Jnr collection'",
+                            "value": "#549B78"
+                        }
+                    ],
+                    "value": "#D1D1D1"
+                },
+                "opacity": {
+                    "condition": {"param": "group_highlight", "value": 1}, 
+                    "value": 0.6
+                },
+                "tooltip": [
+                    {"field": "collection_grouped", "type": "nominal", "title": "Collection Group"},
+                    {"field": "records", "type": "quantitative", "title": "No. of collectibles", "format": ","}
+                ]
+            }
+        },
+        {
+            "mark": {
+                "type": "text",
+                "font": "Plus Jakarta Sans",
+                "fontSize": 10,
+                "baseline": "middle",
+                "align": "center",
+                "limit": 90
+            },
+            "encoding": {
+                "x": {"field": "x_mid", "type": "quantitative"},
+                "y": {"field": "y_mid", "type": "quantitative"},
+                "text": {"field": "label_name", "type": "nominal"},
+                "color": {
+                    "condition": {
+                        "test": "datum.collection_grouped == 'Timothy Millett collection' || datum.collection_grouped == 'Cecil Ballard Jnr collection'",
+                        "value": "white"
+                    },
+                    "value": "#222222"
+                }
+             }
+        }
+    ],
+    "config": {"view": {"stroke": null}}
+}

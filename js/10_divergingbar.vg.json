@@ -1,0 +1,148 @@
+{
+    "$schema":"https://vega.github.io/schema/vega-lite/v5.json",
+    "data": {
+        "url": "https://raw.githubusercontent.com/zitingmow/FIT3179-DV2/main/data/nma_collections.csv"
+    },
+    "width": "container",
+    "height": 320,
+    "transform": [
+        {"filter": "isValid(datum.category_group) && isValid(datum.era)"},
+        {"calculate": "replace(datum.era, /[–—−]/g, '-')", "as": "era_clean"},
+        {
+            "calculate": "datum.era_clean == 'Pre-1788' || datum.era_clean == '1788-1900' ? 'Pre-Federation' : test(/^(1966|2000|2010|2020)/, datum.era_clean) ? 'Modern' : null",
+            "as": "period" 
+        },
+        {"filter": "isValid(datum.period)"},
+        {
+            "aggregate": [{"op": "count", "as": "records"}],
+            "groupby": ["category_group", "period"]
+        },
+        {
+            "joinaggregate": [{"op": "sum", "field": "records", "as": "period_total"}],
+            "groupby" : ["period"]
+        },
+        {
+            "calculate": "datum.records / datum.period_total * 100", 
+            "as": "share"
+        },
+        {
+            "calculate": "datum.period == 'Pre-Federation' ? -datum.share: datum.share",
+            "as" : "signed_share"
+        },
+        {
+            "calculate": "format(datum.share, '.1f') + '%'",
+            "as": "share_label"
+        }
+    ],
+    "layer": [
+        { 
+            "mark": {
+                "type": "bar", 
+                "cornerRadius": 3,
+                "size": 30
+            },
+            "encoding": {
+                "x": {
+                    "field": "signed_share",
+                    "type": "quantitative",
+                    "title": null,
+                    "axis": {
+                        "labels":false,
+                        "ticks":false,
+                        "domain": false
+                    },
+                    "scale": {
+                        "domain": [-100, 100]
+                    }
+            
+                },
+                "y": {
+                    "field": "category_group",
+                    "type": "nominal",
+                    "title": "Category",
+                    "axis": {
+                        "ticks":false,
+                        "domain": false
+                    }
+                },
+                "color": {
+                    "condition": [
+                        {
+                            "test": "datum.period == 'Pre-Federation' && (datum.category_group == 'Medals' || datum.category_group == 'Tokens')",
+                            "value": "#BD7B42"
+                        },
+                        {
+                            "test": "datum.period == 'Modern' && (datum.category_group == 'Medals' || datum.category_group == 'Other')",
+                            "value": "#B7AC5A"
+                        }
+                    ],
+                    "value": "#D1D1D1"
+                },
+                "tooltip": [
+                    {"field": "category_group", "type": "nominal", "title": "Category"},
+                    {"field": "period", "type": "nominal", "title": "Period"},
+                    {"field": "share_label", "type": "nominal", "title": "Share of period records (%)"},
+                    {"field": "records", "type": "quantitative", "title": "NMA records", "format": ",.0f"}
+                ]
+            }
+        },
+        {
+            "mark":{
+                "type": "text",
+                "dx":{"expr": "datum.signed_share < 0 ? -6 : 6"},
+                "align":{"expr": "datum.signed_share < 0 ? 'right' : 'left'"},
+                "fontSize": 10,
+                "font": "Plus Jakarta Sans",
+                "fill": "#000000"
+            },
+            "encoding": {
+                "x": {"field": "signed_share","type": "quantitative"},
+                "y":{"field": "category_group","type": "nominal"},
+                "text":{"field": "share_label", "type": "nominal"}
+            }
+        },
+        {
+            "mark": {
+                "type": "rule", 
+                "color": "#000000", 
+                "strokeWidth": 1, 
+                "strokeDash": [8, 4]},
+            "encoding": {
+                "x": {"datum": 0}
+            }
+        },
+        {
+            "description": "Placeholder for legend",
+            "mark": {
+                "type": "square",
+                "size": 0,
+                "opacity": 0
+            },
+            "encoding": {
+                "color": {
+                    "field": "period",
+                    "type": "nominal",
+                    "title": "Historical Period",
+                    "scale": {
+                        "domain": ["Pre-Federation", "Modern"],
+                        "range": ["#BD7B42", "#B7AC5A"]
+                    }
+                }
+            }
+        }
+    ],
+    "config": {
+        "view": {"stroke": null},
+        "axis": {
+            "titleFont": "Plus Jakarta Sans", "titleFontWeight": "bold", "titlePadding": 10, 
+            "labelFont": "Plus Jakarta Sans", "labelFontSize": 10, "labelPadding": 5,
+            "grid": false
+        },
+        "legend":{
+            "orient": "bottom",
+            "titleFont": "Plus Jakarta Sans", "titleFontSize": 10, "titleColor":"#0D2B80",
+            "labelFont": "Plus Jakarta Sans", "labelFontSize": 9, "labelColor":"#0D2B80",
+            "symbolSize": 200
+        }
+    }
+}

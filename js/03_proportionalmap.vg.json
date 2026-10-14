@@ -1,0 +1,129 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": "container",
+    "height": 300,
+    "params": [
+        {
+            "name": "focus_region",
+            "value": "Australia",
+            "bind": {
+                "input": "select",
+                "options": [
+                    "Full Australia",
+                    "ACT / Canberra",
+                    "Victoria / Melbourne",
+                    "Tasmania",
+                    "Queensland",
+                    "New South Wales",
+                    "South Australia",
+                    "Western Australia",
+                    "Northern Territory"
+                ],
+            "name": "Map Focus: "
+            }
+        },
+        {
+            "name": "zoom_level",
+            "value": 450,
+            "bind": {
+                "input": "range",
+                "min": 450,
+                "max": 3000,
+                "step": 100,
+                "name": "Zoom: "
+            }
+        },
+        {
+            "name": "center_to",
+            "expr": "focus_region == 'ACT / Canberra' ? [149.1, -35.3] : focus_region == 'Victoria / Melbourne' ? [145, -37.8] : focus_region == 'Tasmania' ? [146.8, -42.0] : focus_region == 'Queensland' ? [144.0, -22.5] : focus_region == 'New South Wales' ? [147.0, -32.5] : focus_region == 'South Australia' ? [135.0, -30.0] : focus_region == 'Western Australia' ? [121.0, -25.0] : focus_region == 'Northern Territory' ? [133.5, -19.5] : [134, -28]"
+        }
+    ],
+    "projection": {
+        "type": "equirectangular",
+        "center": {"expr": "center_to"},
+        "scale": {"expr": "zoom_level"}
+    },
+    "layer":[
+        {
+            "data": {
+                "url": "https://raw.githubusercontent.com/zitingmow/FIT3179-DV2/main/js/STE_2026_AUST_GDA2020.json",
+                "format": {"type": "topojson", "feature": "STE_2026_AUST_GDA2020"}
+            },
+            "transform": [
+                {
+                    "filter": "datum.properties.AUS_CODE26 == 'AUS'"
+                }
+            ],
+            "mark":{
+                "type": "geoshape",
+                "fill": "#E0E0E0",
+                "stroke": "white"
+            }
+        },
+        {
+            "data": {"url": "https://raw.githubusercontent.com/zitingmow/FIT3179-DV2/main/data/nma_production_places.csv"},
+            "transform": [
+                {
+                    "filter": "datum.location_scope == 'Australia' && isValid(datum.state_from_place_name) && datum.state_from_place_name != ''"
+                },
+                {
+                    "filter": "datum.place_name != 'Victoria, Australia'"
+                },
+                {
+                    "aggregate": [{"op": "count", "as": "place_records"}],
+                    "groupby": ["place_name", "latitude", "longitude"]
+                },
+                {
+                    "calculate": "datum.place_records > 30 ? 'Over 30 records' : '30 records or fewer'",
+                    "as": "tier"
+                }
+            ],
+            "mark": {
+                "type": "circle",
+                "filled": true,
+                "opacity": 0.60
+            },
+            "encoding": {
+                "longitude": {"field": "longitude","type": "quantitative"},
+                "latitude":{"field": "latitude", "type": "quantitative"},
+                "size":{
+                    "field": "place_records",
+                    "type": "quantitative",
+                    "title": "Production size",
+                    "scale": {"range": [30, 900]}
+                },
+                "color":{
+                    "field": "tier",
+                    "type": "nominal",
+                    "scale": {
+                        "domain": ["Over 30 records", "30 records or fewer"],
+                        "range": ["#0C4A6E", "#9DB4C7"]
+                    },
+                    "legend": {
+                        "title": "Production records"
+                    }
+                },
+                "opacity": {
+                    "field": "tier",
+                    "type": "nominal",
+                    "scale": {
+                        "domain": ["Over 30 records", "30 records or fewer"],
+                        "range": [0.8, 0.6]
+                    }
+                },
+                "tooltip":[
+                    {"field": "place_name", "type": "nominal", "title":"Recorded place"},
+                    {"field": "place_records", "type": "quantitative", "title":"Production records", "format":",.0f"}
+                ]
+            }
+        }
+    ],
+    "config":{
+        "view": {"stroke": null},
+        "legend": {
+            "orient": "right",
+            "titleFont": "Plus Jakarta Sans", "titleFontSize": 10, "titleColor":"#0D2B80",
+            "labelFont": "Plus Jakarta Sans", "labelFontSize": 9, "labelColor":"#0D2B80"
+        }
+    }
+}

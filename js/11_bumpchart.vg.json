@@ -1,0 +1,117 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "data": {
+        "url": "https://raw.githubusercontent.com/zitingmow/FIT3179-DV2/main/data/nma_collections.csv"
+    },
+    "width": "container",
+    "height": 305,
+    "transform": [
+        {"filter": "isValid(datum.era) && datum.era != \"Unknown\" && isValid(datum.category_group)"},
+        {
+            "aggregate":[{"op": "count", "as": "records"}],
+            "groupby":["era", "category_group"]
+        },
+        {
+            "joinaggregate":[{"op": "sum", "field": "records", "as": "era_total"}],
+            "groupby":["era"]
+        },
+        {"calculate": "datum.records / datum.era_total * 100", "as": "share"},
+        {
+            "calculate": "datum.era == 'Pre-1788' ? 0 : datum.era == '1788-1900' ? 1: datum.era == '1901-1965' ? 2: datum.era == '1966-1999' ? 3: datum.era == '2000-2009' ? 4: datum.era == '2010-2019' ? 5: 6",
+            "as": "era_order"
+        },
+        {
+            "joinaggregate": [{"op": "max", "field":"era_order", "as": "last_era_order"}],
+            "groupby": ["category_group"]
+        },
+        {
+            "window": [{"op": "row_number", "as": "rank"}],
+            "groupby": ["era"],
+            "sort": [
+                {"field": "share", "order": "descending"},
+                {"field": "category_group", "order": "ascending"}
+            ]
+        }
+    ],
+    "layer":[
+        {
+            "params": [
+                {
+                    "name": "category_highlight",
+                    "select": {"type": "point", "fields": ["category_group"]},
+                    "bind": "legend"
+                }
+            ],
+            "mark": {
+                "type": "line",
+                "strokeWidth": 5,
+                "point": {
+                    "filled": true,
+                    "size": 200,
+                    "stroke": "white",
+                    "strokeWidth": 1.5
+                }
+            },
+            "encoding": {
+                "x": {
+                    "field": "era",
+                    "type": "ordinal",
+                    "title": "Era",
+                    "sort": ["Pre-1788", "1788-1900", "1901-1965", "1966-1999", "2000-2009", "2010-2019", "2020-Present"],
+                    "axis": {"labelAngle": -15, "titlePadding": -2}
+                },
+                "y": {
+                    "field": "rank",
+                    "type": "quantitative",
+                    "title": null,
+                    "scale": {
+                        "domain": [1,5],
+                        "reverse": true
+                    },
+                    "axis":{
+                        "title": "Rank",
+                        "tickMinStep": 1
+                    }
+                },
+                "color": {
+                    "field": "category_group",
+                    "type": "nominal",
+                    "title": "Category",
+                    "scale": {
+                        "domain": ["Tokens", "Medals", "Other"],
+                        "range": ["#F5C2FF", "#BF5454", "#8B4E9E"]
+                    },
+                    "condition": {
+                    "test": "datum.category_group != 'Tokens' && datum.category_group != 'Medals' && datum.category_group != 'Other'",
+                    "value": "#D1D1D1"
+                    }
+                },
+                "opacity": {
+                    "condition": {"param": "category_highlight", "value": 1},
+                    "value": 0.3
+                },
+                "tooltip": [
+                    {"field": "era", "title": "Era"},
+                    {"field": "category_group", "title": "Category group"},
+                    {"field": "rank", "title": "Rank", "format": "d"},
+                    {"field": "records", "title": "NMA records", "format": "d"},
+                    {"field": "share", "title": "Share within era (%)", "format": ".1f"}
+                ]
+            }
+        }
+    ],
+    "config": {
+        "view": {"stroke": null},
+        "axis": {
+            "titleFont": "Plus Jakarta Sans", "titleFontWeight": "bold", "titlePadding": 10, 
+            "labelFont": "Plus Jakarta Sans", "labelFontSize": 10, "labelPadding": 5,
+            "grid": false
+        },
+        "legend":{
+            "orient": "bottom",
+            "titleFont": "Plus Jakarta Sans", "titleFontSize": 10, "titleColor":"#0D2B80",
+            "labelFont": "Plus Jakarta Sans", "labelFontSize": 9, "labelColor":"#0D2B80",
+            "symbolSize": 200
+        }
+    }
+}

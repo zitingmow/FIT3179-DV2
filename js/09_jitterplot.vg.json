@@ -1,0 +1,83 @@
+{
+    "$schema":"https://vega.github.io/schema/vega-lite/v5.json",
+    "data": {
+        "url": "https://raw.githubusercontent.com/zitingmow/FIT3179-DV2/main/data/commemorative_coins_stamps.csv"
+    },
+    "width": "container",
+    "height": 255,
+    "params": [
+        {
+            "name": "Year_filter",
+            "value": 0,
+            "bind": {
+                "input": "range",
+                "min": 1970,
+                "max": 2026,
+                "step": 1,
+                "name": "Year Selection: "
+            }
+        }
+    ],
+     "transform": [
+        {"filter": "datum.year > Year_filter"}
+    ],
+    "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 350,
+        "opacity": 0.6
+    },
+    "encoding":{
+        "x":{
+            "field": "year",
+            "type": "quantitative",
+            "title": "Issue year",
+            "scale": {"domain": [1960, 2030]},
+            "axis": {
+                "format": "d",
+                "tickCount": 5
+            }
+        },
+        "y":{
+            "field": "theme",
+            "type": "nominal",
+            "title": "Themes",
+            "sort": "-x",
+            "axis": {
+                "labelExpr": "datum.label == 'Transport & Exploration' ? 'Transport' : datum.label"
+            }
+        },
+        "color": {
+            "field": "type",
+            "type": "nominal",
+            "title": "Collectible type",
+            "scale": {
+                "domain": ["Coin", "Stamp"],
+                "range": ["#FF5C66", "#FF8A54"]
+            }
+
+            
+        },
+        "tooltip": [
+            {"field": "title", "type": "nominal", "title": "Issue"},
+            {"field": "year", "type": "quantitative", "title": "Year", "format": "d"},
+            {"field": "theme", "type": "nominal", "title": "Theme"},
+            {"field": "type", "type": "nominal", "title": "Type"},
+            {"field": "denomination", "type": "nominal", "title": "Denomination"}
+        ]
+    },
+    "config": {
+        "view": {"stroke": null},
+        "axis": {
+            "titleFont": "Plus Jakarta Sans", "titleFontWeight": "bold", "titlePadding": 10, 
+            "labelFont": "Plus Jakarta Sans", "labelFontSize": 10, "labelPadding": 5,
+            "grid": false
+        },
+        "legend":{
+            "orient": "bottom",
+            "titleFont": "Plus Jakarta Sans", "titleFontSize": 10, "titleColor":"#0D2B80",
+            "labelFont": "Plus Jakarta Sans", "labelFontSize": 9, "labelColor":"#0D2B80",
+            "symbolSize": 200
+        }
+    }
+}

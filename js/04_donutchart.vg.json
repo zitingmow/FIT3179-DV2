@@ -1,0 +1,62 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "data": {
+        "url": "https://raw.githubusercontent.com/zitingmow/FIT3179-DV2/main/data/nma_collections.csv"
+    },
+    "width": "container",
+    "height": 300,
+    "params":[
+        {
+            "name": "group_highlight",
+            "select": {
+                "type": "point",
+                "fields": ["category_group"],
+                "on": "mouseover",
+                "clear": "mouseout"
+            }
+        }
+    ],
+    "mark":{
+        "type": "arc",
+        "innerRadius": 70,
+        "color": "#FFFFFF"
+    },
+    "encoding": {
+        "theta": {
+            "aggregate": "count",
+            "type": "quantitative",
+            "title": "Number of items"
+        },
+        "color": {
+            "field": "category_group",
+            "type": "nominal",
+            "title": "Category",
+            "scale":{
+                "domain": ["Banknotes", "Coins", "Medals", "Stamps", "Tokens", "Other"],
+                "range": ["#D95CB5","#FF5C66","#BF5454","#FF8A54","#937499","#8B4E9E"]
+            }
+        },
+        "order":{
+            "aggregate": "count",
+            "type": "quantitative",
+            "sort": "ascending"
+        },
+        "opacity": {
+            "condition": {"param": "group_highlight", "value": 1}, 
+            "value": 0.6
+        },
+        "tooltip": [
+            {"field": "category_group", "type": "nominal", "title": "category"},
+            {"aggregate": "count", "type": "quantitative", "title": "Items"}
+        ]
+    },
+    "config":{
+        "view": { "stroke": null},
+        "legend": {
+            "orient": "right",
+            "titleFont": "Plus Jakarta Sans", "titleFontSize": 10, "titleColor":"#0D2B80",
+            "labelFont": "Plus Jakarta Sans", "labelFontSize": 9, "labelColor":"#0D2B80",
+            "symbolSize": 200
+        }
+    }
+}

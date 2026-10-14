@@ -1,0 +1,65 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "data": {"url": "https://raw.githubusercontent.com/zitingmow/FIT3179-DV2/main/data/nma_collections.csv"},
+    "width": "container",
+    "height": 250,
+    "params": [
+        {
+            "name": "Year_filter",
+            "value": 0,
+            "bind": {
+                "input": "range",
+                "min": 1750,
+                "max": 2022,
+                "step": 1,
+                "name": "Year Selection: "
+            }
+        }
+    ],
+    "transform": [
+        {"filter": "datum.year != null && datum.year > 1700"},
+        {"filter": "datum.year > Year_filter"}
+    ],
+    "mark":{
+        "type": "area",
+        "interpolate":"basis",
+        "color": "#FFFFFF"
+    },
+    "encoding": {
+        "x": {
+            "field" : "year",
+            "type" : "quantitative",
+            "title": "Year",
+            "axis":{"format": "d"}
+        },
+        "y":{
+            "aggregate" : "count",
+            "type" : "quantitative",
+            "stack" : "center",
+            "title": "Number of Recorded Collectibles"
+        },
+        "color": {
+            "field": "category_group",
+            "type": "nominal",
+            "title": "Category Group",
+            "scale":{
+                "domain": ["Banknotes", "Coins", "Medals", "Stamps", "Tokens", "Other"],
+                "range": ["#D95CB5","#FF5C66","#BF5454","#FF8A54","#F5C2FF","#8B4E9E"]
+            }
+        }
+    },
+    "config":{
+        "view": { "stroke": null},
+        "axis": {
+            "titleFont": "Plus Jakarta Sans", "titleFontWeight": "bold", "titlePadding": 10, 
+            "labelFont": "Plus Jakarta Sans", "labelFontSize": 10, "labelPadding": 5,
+            "grid": false
+        },
+        "legend": {
+            "orient": "bottom",
+            "titleFont": "Plus Jakarta Sans", "titleFontSize": 10, "titleColor":"#0D2B80",
+            "labelFont": "Plus Jakarta Sans", "labelFontSize": 9, "labelColor":"#0D2B80",
+            "symbolSize": 100
+        }
+    }
+}

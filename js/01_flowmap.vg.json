@@ -1,0 +1,118 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": "container",
+    "height": 300,
+    "projection": {
+        "type": "equalEarth",
+        "scale": 150,
+        "center":[70, 10]
+    },
+    "data": { "url": "https://raw.githubusercontent.com/zitingmow/FIT3179-DV2/main/data/nma_production_places.csv"},
+    "transform": [
+        {
+            "filter": "datum.location_scope == 'Outside Australia' && isValid(datum.latitude)"
+        },
+        {"aggregate": [
+                {
+                    "op": "count", "as": "records"
+                },
+                {
+                    "op": "min", "field": "place_name", "as": "place"
+                }
+            ],
+            "groupby": ["latitude", "longitude"]
+        },
+        {"calculate": "{type: 'LineString', coordinates: [[datum.longitude, datum.latitude], [149.13, -35.28]]}", "as": "line"}
+    ],
+    "layer":[
+        {
+            "data": {
+                "url": "https://raw.githubusercontent.com/zitingmow/FIT3179-DV2/main/js/ne_110m_admin_0_countries.json",
+                "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
+            },
+            "mark":{
+                "type": "geoshape",
+                "fill": "#E0E0E0",
+                "stroke": "white"
+            }
+        },
+        {
+            "data": {
+                "url": "https://raw.githubusercontent.com/zitingmow/FIT3179-DV2/main/js/ne_110m_admin_0_countries.json",
+                "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
+            },
+            "mark":{
+                "type": "geoshape",
+                "fill": "#0C4A6E",
+                "stroke": "white"
+            },
+            "transform": [
+                {
+                    "filter": "indexof(['United Kingdom', 'Germany', 'France', 'Netherlands', 'Belgium', 'Austria', 'Italy', 'Japan', 'Singapore', 'Malaysia', 'Indonesia', 'China', 'India', 'Greece', 'Switzerland', 'Australia'], datum.properties.NAME) > 0"
+                }
+            ]
+        },
+        {
+            "mark":{
+                "type": "geoshape",
+                "filled": false,
+                "stroke": "#C8102E",
+                "opacity": 0.45
+            },
+            "encoding": {
+                "shape": {"field": "line","type": "geojson"},
+                "strokeWidth": {
+                    "field": "records", "type": "quantitative", "title": "Records",
+                    "scale": {"type": "sqrt", "domain": [1,100], "range": [0.8, 8]},
+                    "legend": {
+                        "type": "symbol",
+                        "symbolType": "stroke",
+                        "symbolSize": 300,
+                        "values": [1, 10, 50, 100]
+                    }
+                },
+                "tooltip":[
+                    {"field": "place", "title":"Place"},
+                    {"field": "records", "title": "Records"}
+                ]
+            }
+        },
+        {
+            "mark": {
+                "type": "circle",
+                "color": "#C8102E",
+                "size": 50
+            },
+            "encoding": {
+                "longitude": {"field": "longitude", "type": "quantitative"},
+                "latitude": {"field": "latitude", "type": "quantitative"}
+            }
+        },
+        {
+            "data": {"values": [{"car_longitude": 149.13, "car_latitude": -35.28, "label": "Canberra"}]},
+            "mark": {
+                "type": "text",
+                "dx": 10,
+                "dy": 12,
+                "font": "Plus Jakarta Sans",
+                "fontSize": 11,
+                "fontWeight": "bold",
+                "color": "#0C4A6E",
+                "align": "left"
+            },
+            "encoding": {
+                "longitude": {"field": "car_longitude", "type": "quantitative"},
+                "latitude": {"field": "car_latitude", "type": "quantitative"},
+                "text": {"field": "label", "type": "nominal"}
+            }
+        }
+    ],
+    "config":{
+        "view": {"stroke": null},
+        "legend": {
+            "orient": "right",
+            "titleFont": "Plus Jakarta Sans", "titleFontSize": 10, "titleColor":"#0D2B80",
+            "labelFont": "Plus Jakarta Sans", "labelFontSize": 9, "labelColor":"#0D2B80"
+        }
+    }
+}

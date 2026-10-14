@@ -1,0 +1,155 @@
+{
+    "$schema":"https://vega.github.io/schema/vega-lite/v5.json",
+    "data": {
+        "url": "https://raw.githubusercontent.com/zitingmow/FIT3179-DV2/main/data/commemorative_coins_stamps.csv"
+    },
+    "width": "container",
+    "height": 300,
+    "transform": [
+        {"filter": "(datum.type == 'Coin' || datum.type == 'Stamp') && isValid(datum.theme)"},
+        {
+            "aggregate": [{"op": "count", "as": "records"}],
+            "groupby": ["theme", "type"]
+        },
+        {
+            "joinaggregate": [{"op": "sum", "field": "records", "as": "type_total"}],
+            "groupby" : ["type"]
+        },
+        {
+            "joinaggregate": [{"op": "sum", "field": "records", "as": "theme_total"}],
+            "groupby" : ["theme"]
+        },
+        {
+            "calculate": "datum.records / datum.type_total * 100", 
+            "as": "share"
+        },
+        {
+            "calculate": "datum.type == 'Coin' ? -datum.share: datum.share",
+            "as" : "signed_share"
+        },
+        {
+            "calculate": "format(datum.share, '.1f') + '%'",
+            "as": "share_label"
+        }
+    ],
+    "layer": [
+        { 
+            "mark": {
+                "type": "bar", 
+                "cornerRadius": 3,
+                "size": 30
+            },
+            "encoding": {
+                "x": {
+                    "field": "signed_share",
+                    "type": "quantitative",
+                    "title": null,
+                    "axis": {
+                        "labels":false,
+                        "ticks":false,
+                        "domain": false
+                    },
+                    "scale": {
+                        "domain": [-70, 70]
+                    }
+                },
+                "y": {
+                    "field": "theme",
+                    "type": "nominal",
+                    "title": "Theme",
+                    "axis": {
+                        "ticks":false,
+                        "domain": false
+                    }
+                },
+                "color": {
+                    "condition": [
+                        {
+                            "test": "datum.type == 'Coin' && (datum.theme == 'Military' || datum.theme == 'Royalty')",
+                            "value": "#FF5C66"
+                        },
+                        {
+                            "test": "datum.type == 'Stamp' && (datum.theme == 'Military' || datum.theme == 'Royalty')",
+                            "value": "#FF8A54"
+                        },
+                        {
+                            "test": "datum.type == 'Coin'",
+                            "value": "#D1D1D1"
+                        },
+                        {
+                            "test": "datum.type == 'Stamp'",
+                            "value": "#D1D1D1"
+                        }
+                    ],
+                    "value": "#D1D1D1"
+                }, 
+                "tooltip": [
+                    {"field": "theme", "type": "nominal", "title": "Theme"},
+                    {"field": "type", "type": "nominal", "title": "Issue type"},
+                    {"field": "share_label", "type": "nominal", "title": "Share of type (%)"},
+                    {"field": "records", "type": "quantitative", "title": "Issue records", "format": ",.0f"}
+                ]
+            }
+        },
+        {
+            "mark":{
+                "type": "text",
+                "dx":{"expr": "datum.signed_share < 0 ? -6 : 6"},
+                "align":{"expr": "datum.signed_share < 0 ? 'right' : 'left'"},
+                "fontSize": 10,
+                "font": "Plus Jakarta Sans",
+                "fill": "#000000"
+            },
+            "encoding": {
+                "x": {"field": "signed_share", "type": "quantitative"},
+                "y":{"field": "theme", "type": "nominal"},
+                "text":{"field": "share_label", "type": "nominal"}
+            }
+        },
+        {
+            "mark": {
+                "type": "rule", 
+                "color": "#0D2B80", 
+                "strokeWidth": 1, 
+                "strokeDash": [8, 4]
+            },
+            "encoding": {
+                "x": {"datum": 0}
+            }
+        },
+        {
+            "description": "Placeholder for legend",
+            "mark": {
+                "type": "square",
+                "size": 0,
+                "opacity": 0
+            },
+            "encoding": {
+                "color": {
+                    "field": "type",
+                    "type": "nominal",
+                    "title": "Issue Type",
+                    "scale": {
+                        "domain": ["Coins", "Stamp"],
+                        "range": ["#FF5C66", "#FF8A54"]
+                    }
+                }
+            }
+        }
+    ],
+    "config": {
+        "view": {"stroke": null},
+        "axis": {
+            "titleFont": "Plus Jakarta Sans", "titleFontWeight": "bold", "titlePadding": 10, 
+            "labelFont": "Plus Jakarta Sans", "labelFontSize": 10, "labelPadding": 5,
+            "labelExpr": "datum.label == 'Transport & Exploration' ? 'Transport' : datum.label",
+            "grid": false
+        },
+        "legend":{
+            "orient": "top-right",
+            "titleFont": "Plus Jakarta Sans", "titleFontSize": 10, "titleColor":"#0D2B80",
+            "labelFont": "Plus Jakarta Sans", "labelFontSize": 9, "labelColor":"#0D2B80",
+            "symbolSize": 200
+        }
+    }
+}

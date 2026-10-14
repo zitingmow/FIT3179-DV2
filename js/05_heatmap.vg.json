@@ -1,0 +1,93 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "data": {
+        "url": "https://raw.githubusercontent.com/zitingmow/FIT3179-DV2/main/data/nma_collections.csv"
+    },
+    "width": "container",
+    "height": 300,
+    "transform": [
+            {
+                "filter": "datum.material_family != 'Unspecified'"
+            },
+            {
+                "aggregate":[{"op": "count", "as": "records"}],
+                "groupby":["category_group", "material_family"]
+            },
+            {
+                "impute": "records",
+                "key": "category_group",
+                "groupby": ["material_family"],
+                "value": 0
+            },
+            {
+                "joinaggregate":[{"op": "sum", "field": "records", "as": "category_total"}],
+                "groupby":["category_group"]
+            },
+
+            {
+                "calculate": "datum.records / datum.category_total * 100", "as": "percent"
+            }
+        ],
+    "params": [
+        {
+            "name": "highlight", 
+            "select": "point"
+        }
+    ],
+    "mark": {
+        "type" : "rect",
+        "stroke": "white",
+        "strokeWidth": 1.5
+    },
+    "encoding": {
+        "x": {
+            "field": "category_group",
+            "type": "ordinal",
+            "axis": {"labelAngle":0},
+            "title": "Category"
+        },
+        "y": {
+            "field": "material_family",
+            "type": "ordinal",
+            "title": "Material"
+        },
+        "color": {
+            "condition": {
+                "test": "datum.records == 0",
+                "value": "#EFEFEF"
+            },
+            "field": "percent",
+            "type": "quantitative",
+            "title": "Records (%)",
+            "scale": {
+                "domain": [0, 100],
+                "scheme": "tealblues"
+            }
+        },
+        
+        "opacity": {
+            "condition": {"param": "highlight", "value": 1},
+            "value": 0.3
+        },
+        "tooltip": [
+            {"field": "category_group", "title": "Category"},
+            {"field": "material_family","title": "Material Family"},
+            {"field": "records","title": "Records","format": "d"},
+            {"field": "category_total","title": "Category Total","format": "d"},
+            {"field": "percent","title": "%","format": ".1f"}
+        ]
+    },
+    "config": {
+        "view": {"stroke": "null"},
+        "axis": {
+            "titleFont": "Plus Jakarta Sans", "titleFontWeight": "bold", "titlePadding": 10, 
+            "labelFont": "Plus Jakarta Sans", "labelFontSize": 10, "labelPadding": 5
+        },
+        "legend": {
+            "orient": "right",
+            "titleFont": "Plus Jakarta Sans", "titleFontSize": 10, "titleColor":"#0D2B80",
+            "labelFont": "Plus Jakarta Sans", "labelFontSize": 9, "labelColor":"#0D2B80",
+            "symbolSize": 200
+        }
+    }
+}

@@ -1,0 +1,72 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": "container",
+    "height": 350,
+    "projection": {"type": "mercator"},
+    "data": {
+        "url": "https://raw.githubusercontent.com/zitingmow/FIT3179-DV2/main/data/nma_production_places.csv"
+    },
+    "transform": [
+        {
+            "filter": "datum.location_scope == 'Australia' && isValid(datum.state_from_place_name) && datum.state_from_place_name != ''"
+        },
+        {
+            "aggregate": [{ "op": "count", "as": "place_records"}], 
+            "groupby": ["state_from_place_name"]
+        },
+        {
+            "joinaggregate": [{"op": "sum", "field": "place_records", "as": "total_records"}]
+        },
+        {
+            "calculate": "datum.place_records / datum.total_records * 100",
+            "as": "% of records"
+        },
+        {
+            "calculate": "datum['% of records'] < 2 ? 'Less than 2%' : datum['% of records'] < 5 ? '2%–5%' : datum['% of records'] < 10 ? '5%–10%' : datum['% of records'] < 20 ? '10%–20%' : '20%+'",
+            "as": "record_group"
+        },
+        {
+            "lookup": "state_from_place_name",
+            "from": {
+                "data": {
+                    "url": "https://raw.githubusercontent.com/zitingmow/FIT3179-DV2/main/js/STE_2026_AUST_GDA2020.json",
+                    "format": {
+                        "type": "topojson",
+                        "feature": "STE_2026_AUST_GDA2020"
+                    }
+                },
+                "key": "properties.STE_NAME26"
+            },
+            "as": "geo"
+        }
+    ],
+    "mark": {"type": "geoshape"},
+    "encoding": {
+        "shape": {
+            "field": "geo",
+            "type": "geojson"
+        },
+        "color": {
+            "field": "record_group",
+            "type": "nominal",
+            "title": "Collectibles (%)",
+            "scale": {
+                "domain": ["Less than 2%", "2%–5%", "5%–10%", "10%–20%", "20%+"],
+                "range": ["#E0F2FE", "#7DD3FC", "#0284C7", "#0369A1", "#0C4A6E"]
+            }
+        },
+         "tooltip": [
+            {"field": "state_from_place_name", "type": "nominal", "title": "State or territory"},
+            {"field": "place_records", "type": "quantitative", "title": "Production-place records", "format": ",.0f"},
+            {"field": "% of records", "type": "quantitative", "title": "% of collectibles", "format": ".1f"}
+        ]
+    },
+    "config":{
+        "view": {"stroke": null},
+        "legend": {
+            "orient": "right",
+            "titleFont": "Plus Jakarta Sans", "titleFontSize": 10, "titleColor":"#0D2B80",
+            "labelFont": "Plus Jakarta Sans", "labelFontSize": 9, "labelColor":"#0D2B80"
+        }
+    }
+}
