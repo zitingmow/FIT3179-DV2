@@ -11,11 +11,12 @@
     <!-- Import Google Font-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+    
+    
+    <!-- Embedd Vegalite File-->
     <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
-
-    <!-- Embedd Vegalite File-->
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
     <script src="js/vegalite_vis.js"></script>
 
@@ -26,83 +27,71 @@
 </head>
 
 <body>
-    <!-- HEADER: full-width gold bar-->
+
+
+    <!-- BAR -->
     <div class="header">
-        <!-- INNER BOX: keeps the content centered and holds 3 boxed side-by-side -->
-        <div class="header-inner">
-            
-            <!-- Box 1: flag + title + subtitle -->
-            <div class="header-inner-left">
-                <span class="flag">🇦🇺</span>
-                <div>
-                    <h3>AUSTRALIAN COLLECTIBLES</h3>
-                    <p>FIT3179 DATA VISUALISATIONS 2</p>
-                </div>
+        <!-- Box 1: flag + title + subtitle -->
+        <div class="header-left">
+            <span class="flag">🇦🇺</span>
+            <div>
+                <h3>AUSTRALIAN COLLECTIBLES</h3>
+                <p>FIT3179 DATA VISUALISATIONS 2</p>
             </div>
-
-            <!-- Box 2: 4 links to each sections -->
-            <div class="header-inner-middle">
-                <a href="#geographic">1. Spatial</a>
-                <a href="#category">2. Category</a>
-                <a href="#era-analysis">3. Eras</a>
-                <a href="#mintage">4. Mintage & Value</a>
-            </div>
-
-            <!-- Box 3: link to the visualization part -->
-            <a href="#geographic" class="button">EXPLORE VISUALISATION ↓</a>
         </div>
+
+        <!-- Box 2: 4 links to each sections -->
+        <div class="header-middle">
+            <a href="#geographic">1. Spatial</a>
+            <a href="#category">2. Category</a>
+            <a href="#era">3. Eras</a>
+            <a href="#mintage">4. Mintage & Value</a>
+        </div>
+
+        <!-- Box 3: link to the visualization part -->
+        <a href="#geographic" class="button">EXPLORE VISUALISATION ↓</a>
+
     </div>
 
 
-
-
+    <!-- CONTENT -->
     <div class="content">
+        
         <!-- SUB-HEADER -->
-        <div class="pure-g">
-            <div class="pure-u-md-16-24 sub-header-left">
+        <div class="pure-g sub-header">
+            <div class="pure-u-md-17-24 sub-header-left">
                 <h1>Treasures of the Commonwealth: Australia's Collecting Story.</h1>
-                <p> An empirical investigation into national heritage collections, 
-                    <br> commemorative coinage, postal stamp issues, and colonial trade tokens. 
-                    <br> Driven by clean, structured data from the 
-                    <br><b>National Museum of Australia (NMA) Collection API</b> and 
-                    <br><b>Royal Australian Mint (RAM)</b> archives spanning 1788 to 2026.
+                <p>An empirical investigation into Australia’s national heritage collections, 
+                    <br>commemorative coins, postal stamps, and colonial trade tokens, 
+                    <br>from the <b>National Museum of Australia (NMA) </b> Collection API 
+                    <br>and <b>Royal Australian Mint (RAM)</b> archives from 1788 to 2026. 
+                    <br>The study explores physical objects, materials, production locations, 
+                    <br>mintages, and historical themes across pre-Federation, decimal, and 
+                    <br>contemporary eras.
                 </p>
             </div>
-
-            <div class="pure-u-md-8-24 sub-header-right">
-                <!-- RIGHT SUB-HEADER -->
-                    <div class="arch-card">
-                        <div class="icon-circle">
-                            <img src="coins.png" class="arch-img">
-                        </div>
-                        <h2> NMA & RAM Collections </h2>
-                        <p>Analysing physical objects, materials, production locations, 
-                            <br> mintages, and historical themes across pre-federation, 
-                            <br> decimal, and contemporary eras.</p>
-                        <a href="#geographic" class="button">VIEW CHARTS & DATA</a>
-                    </div>
+            <div class="pure-u-md-7-24 sub-header-right">
+                <img src="coins.png" class="arch-img">
             </div>
         </div>
-
-
 
 
         <!-- KPI CARD -->
         <div class="pure-g">
             <div class="pure-u-md-1-3">
-                <div class="chart-card">
+                <div class="card">
                     <p class="stats-number">12</p>
                     <p class="stats-label">Interactive Visualisations</p>
                 </div>
             </div>
             <div class="pure-u-md-1-3">
-                <div class="chart-card">
+                <div class="card">
                     <p class="stats-number">3</p>
-                    <p class="stats-label">Spatial & Flow (Map) Idioms</p>
+                    <p class="stats-label">Spatial & Map Idioms</p>
                 </div>
             </div>
             <div class="pure-u-md-1-3">
-                <div class="chart-card">
+                <div class="card">
                     <p class="stats-number">8</p>
                     <p class="stats-label"> Eras (1788 - Present)</p>
                 </div>
@@ -110,44 +99,44 @@
         </div>
 
 
-
-
-        <!-- section 1: chart & text -->
-        <h2 class="section-text" id="geographic">🔍 Section 1 - Geographic & Spatial Provenance</h2>
-        <p class="section-text section-subtitle">&ensp; Where collectibles were made, collected and moved &ensp;</p>
+        <!-- SECTION 1: chart & text -->
+        <div id="geographic">
+            <p class="section-text">01 · WHERE COLLECTIBLES WERE MADE, COLLECTED AND MOVED</p>
+            <h2>GEOGRAPHIC & SPATIAL PROVENANCE</h2>
+            <p class="section-subtitle"> Exploring the spatial distribution, manufacturing origins, and geographic 
+                <br> of cultural heritage objects across historical collections.</p>
+            <p class="divide"></p>
+        </div>
 
         <div class="pure-g">
             <div class="pure-u-md-6-24 insight">
-                <p>
-                    <b style="color: #C8102E;">Victoria</b> is the biggest source of domestic collectibles, 
-                    producing about half of all Australian items, with major southeastern cities like 
-                    <b style="color: #C8102E;">Melbourne</b> and <b style="color: #C8102E;">Canberra</b> acting 
-                    as the main manufacturing and collection hubs.
-                </p>
-                <p>
-                    Internationally, <b style="color: #0C4A6E;">Northern Europe </b> is the top overseas contributor, 
-                    sending the largest share of global items directly to <b style="color: #C8102E;">Canberra</b> through 
-                    long-standing trade and historical connections. Together, these maps show how <b style="color: #C8102E;">Australia</b>
-                    relied on local cities for home-grown production while looking to <b style="color: #0C4A6E;">Europe</b> for 
-                    imported historical objects.
-                </p>
+                    <p>
+                        <b>Victoria</b> produces about half of all local items, 
+                        with big cities like <b>Melbourne</b> and <b>Canberra</b> acting 
+                        as the main hubs. Internationally, <b>Northern Europe</b> sends 
+                        the most items directly to Canberra.
+                    </p>
+                    <p>
+                         Together, these maps show how Australia relied on local cities for home-grown 
+                         production while looking to Europe for imported historical objects.
+                    </p>
             </div>
 
             <div class="pure-u-md-18-24">
                 <!-- chart 1 -->
-                <div class="chart-card">
+                <div class="card">
                     <div class="chart-header">
-                        <h3>Northern Europe Is Australia's Main Overseas Collectible Origin</h3>
+                        <h3>Northern Europe is Australia's Main Overseas Collectible Origin</h3>
                     </div> 
                     <div class="chart" id="vis1"></div>
-                </div>         
-            </div>
+                </div>  
+            </div>       
         </div>
 
         <div class="pure-g">
             <div class="pure-u-md-1-2">
                 <!-- chart 2 -->
-                <div class="chart-card">
+                <div class="card">
                     <div class="chart-header">
                         <h3>Victoria Holds About Half of Collectible Records</h3>
                     </div>
@@ -157,11 +146,11 @@
         
             <div class="pure-u-md-1-2">
                 <!-- chart 3 -->
-                <div class="chart-card">
+                <div class="card">
                     <div class="chart-header">
                         <h3>Melbourne and Canberra Lead Production Hubs</h3>
                     </div> 
-                    <div class="chart" id="vis3"></div>
+                    <div class="chart" id="vis3" style="font-family: 'Nunito Sans', sans-serif; font-size: 12px; color: #000000;"></div>
                 </div>         
             </div>
         </div>
@@ -169,172 +158,173 @@
 
 
 
-
         <!-- section 2: chart & text -->
-        <h2 class="section-text" id="category">🔍 Section 2 - Collection and Commemorative Profiles</h2>
-        <p class="section-text section-subtitle">&ensp; What the collection holds, from materials to themes &ensp;</p>
-        
-        <div class="pure-g">
+        <div>
+            <p class="section-text">02 · WHAT THE COLLECTION HOLDS, FROM MATERIALS TO THEMES</p>
+            <h2 id="category">COLLECTION AND COMMEMORATIVE PROFILES</h2>
+            <p class="section-subtitle"> A comprehensive breakdown of collection contents, analyzing the spectrum 
+                <br> of physical materials and thematic categories.</p>
+            <p class="divide"></p>
+        </div>
+
+        <!-- top chart -->
+         <div class="pure-g">
             <!-- chart 4 -->
-            <div class="pure-u-md-1-2">
-                <div class="chart-card">
+            <div class="pure-u-md-18-24">
+                <div class="card">
                     <div class="chart-header">
-                        <h3>Medals and Other Are the Main Collection</h3>   
+                        <h3><span style="color: #BF5454;">Medals</span> and <span style="color: #8B4E9E;">Other</span> are the Main Collection</h3>   
                     </div> 
                     <div class="chart" id="vis4"></div>         
                 </div>
             </div>
+            <div class="pure-u-md-6-24 insight">
+                <p>
+                    Medals and other heritage objects such as badges, pins, and ribbons, make up <b>two-thirds</b> of 
+                    the collection because they were kept to <b>remember historical events</b>. 
+                    Metals make coins <b>last longer</b>, while paper and plastics were chosen for <b>high-turnover</b> items 
+                    like banknotes and stamps.
+                </p>
+                <p>
+                    Official issues focus on <b>military history</b> and <b>royalty</b> because state mints aimed to 
+                    project <b>national authority</b>. However, the museum's broader variety was shaped by <b>private 
+                    collectors</b> like Timothy Millett and Cecil Ballard Jnr because public archives needed private 
+                    contributions to capture everyday culture.
+                </p>
+            </div>
+        </div>
 
+        <!-- middle chart -->
+        <div class="pure-g">
             <!-- chart 5 -->
             <div class="pure-u-md-1-2">
-                <div class="chart-card">
+                <div class="card">
                     <div class="chart-header">
-                        <h3>Metal Dominates Coins, Medals and Tokens</h3>     
+                        <h3>Metal Dominates <span style="color: #FF5C66;">Coins</span>, <span style="color: #BF5454;">Medals</span> and <span style="color: #937499;">Tokens</span></h3>     
                     </div> 
                     <div class="chart" id="vis5"></div>         
                 </div>
             </div>
-        </div>
-
-        <div class="pure-g">
-            <div class="pure-u-md-19-24">
-                <!-- chart 6 -->
-                <div class="chart-card">
-                    <div class="chart-header">
-                        <h3>Royalty Leads Coins, Military Leads Stamps</h3>   
-                    </div> 
-                    <div class="chart" id="vis6"></div>         
-                </div>
-            </div>
-
-            <div class="pure-u-md-5-24 insight">
-               <p>
-                    Based on the charts, <span style="color: #BF5454;">medals</span> and <span style="color: #8B4E9E;">other</span> 
-                    category form the vast majority of the National Museum of Australia's collection, together accounting for roughly 
-                    <b>two-thirds</b> of all cataloged items. 
-                    
-                    <br><br>When examining material composition, <b> Metal</b> is mainly used for 
-                    <span style="color: #FF5C66;">coins</span>, <span style="color: #BF5454;">medals</span>, and 
-                    <span style="color: #937499;">tokens</span>. <b> Paper</b> dominates 
-                    <span style="color: #D95CB5;">banknotes</span>, while <span style="color: #FF8A54;">Stamps</span>
-                    use a wider mix of materials, including <b>Paper, Plastic,</b> and <b>  Rubber</b>.
-                </p>
-            </div>
-        </div>
-
-
-        
-
-        <div class="pure-g">
-            <div class="pure-u-md-19-24">
-                <!-- chart 7 -->
-                <div class="chart-card">
-                    <div class="chart-header">
-                        <h3>Private Collections Dominated by Timothy and Cecil</h3>
-                    </div> 
-                    <div class="chart" id="vis7"></div>            
-                </div>
-            </div>
-            <div class="pure-u-md-5-24 insight">
-               <p>
-                    <b>Military</b> themes make up most of the <b>stamp</b> issues (over 60%), 
-                    while <b>royalty</b> leads the <b>coins</b> (over 35%). At the same time, 
-                    most items in the museum come from a few main donors, especially the 
-                    <b>Timothy Millett</b> and <b>Cecil Ballard Jnr</b>. This shows that official 
-                    <b>coins</b> and <b>stamps</b> focused on <b>military</b> service and the <b>royal</b> family, 
-                    while private donations heavily built the rest of the collection.
-                </p>
-            </div>
-        </div>
-
-
-
-
-
-
-
-                   
-        <!-- section 3: chart & text--> 
-        <h2 class="section-text" id="era-analysis">🔍 Section 3 - Change Across Time and Eras</h2>
-        <p class="section-text section-subtitle">&ensp; How collecting has changed across Australian history &ensp;</p>
-
-        <!-- top chart -->
-        <div class="pure-g">
-            <div class="pure-u-md-6-24 insight">
-                <p>
-                    Recorded collectibles grew significantly, with major peaks around <b>1935, 1960, and 1987</b>. 
-                    These peaks may reflect increased interest in commemorative items and changing collecting trends. 
-                    For example, the <b>1987</b> peak coincided with greater production of <span style="color: #D95CB5;">banknotes</span>
-                    and <span style="color: #FF5C66;">coins</span>.Themes also shifted from political subjects like 
-                    <b>Royalty</b> and <b>Military</b> to broader social and cultural topics such as 
-                    <b>First Nations, Wildlife, Sport,</b> and <b>Culture</b>.
-                </p>
-                <p>
-                    This shift reflects Australia's evolving society and values, suggesting that collectibles 
-                    are increasingly used to represent different aspects of Australian society rather than focusing 
-                    solely on traditional history. Overall, collecting has grown not only in volume, but also in the variety 
-                    of items and themes represented.
-                </p>    
-
-            </div>
-
-            <div class="pure-u-md-18-24">
-                <div class="pure-g">
-                    <!-- chart 8 -->
-                    <div class="pure-u-md-1-2">
-                        <div class="chart-card">
-                            <div class="chart-header" style="margin-bottom: 10px">
-                                <h3>Collecting Surges Spike Around 1935, 1960 and 1987</h3>
-                            </div>
-                            <div class="chart" id="vis8"></div>         
-                        </div>
-                    </div>
-                    <!-- chart 9 -->
-                    <div class="pure-u-md-1-2">
-                        <div class="chart-card">
-                            <div class="chart-header" style="margin-bottom: 10px">
-                                <h3>First Nations and Wildlife Themes Are Recent</h3>
-                            </div>
-                            <div class="chart" id="vis9"></div>         
-                        </div>
-                    </div>
+            
+            <!-- chart 6 -->
+            <div class="pure-u-md-1-2">
+                <div class="card">
+                        <div class="chart-header">
+                            <h3>Royalty Leads <span style="color: #FF5C66;">Coins</span>, Military Leads <span style="color: #FF8A54;">Stamps</span></h3>   
+                        </div> 
+                        <div class="chart" id="vis6"></div>         
                 </div>
             </div>
         </div>
 
         <!-- bottom chart -->
+        <!-- chart 7 -->
+        <div class="pure card">
+            <div class="chart-header">
+                <h3>Private Collections Dominated by Timothy & Cecil</h3>
+            </div> 
+            <div class="chart" id="vis7"></div>            
+        </div>
+
+
+
+            
+        <!-- section 3: chart & text--> 
+        <div>
+            <p class="section-text">03 · HOW COLLECTING HAS CHANGED ACROSS AUSTRALIAN HISTORY</p>
+            <h2 id="era">CHANGE ACROSS TIME AND ERAS</h2>
+            <p class="section-subtitle">Tracing how what we collect and how we preserve it 
+                <br>has shifted across key historical eras in Australia.</p>
+            <p class="divide"></p>
+        </div>
+
+        <!-- top chart -->
+        <div class="pure-g">
+            <div class="pure-u-md-6-24 insight">
+                <p>Old tokens show up early in the 1800s but disappear because people 
+                    <b>stopped using</b> them and <b>switched to regular coins</b>. Meanwhile, medals last 
+                    across many years because of its nature such as very <b>strong</b> and <b>does not break easily</b>. 
+                </p>  
+                
+                <p><br>Newer collections focus on banknotes and coins because paper money and 
+                    special coins became very <b>popular</b> later on. However, stamp collections stop around 
+                    the late 1900s because people <b>stopped sending letters in the mail</b>. 
+                </p>
+            </div>
+
+            <div class="pure-u-md-18-24">
+                <div class="pure-g">
+                    <!-- chart 8 -->
+                    <div class="card">
+                        <div class="chart-header" style="margin-bottom: 10px">
+                            <h3>Collecting Surges Spike Around 1935, 1960 and 1987</h3>
+                        </div>
+                        <div class="chart" id="vis8" style="font-family: 'Nunito Sans', sans-serif; font-size: 12px; color: #000000;"></div>         
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- middle chart -->
         <div class="pure-g">
             <div class="pure-u-md-6-24 insight">
                 <p>
-                    Before <b>1901</b>, a shortage of official <span style="color: #FF5C66;">coins</span> led local shop owners to 
-                    produce copper <span style="color: #937499;">tokens</span>, which made up <b>over 60%</b> of early collections. 
-                    After the Australian government introduced official currency, private <span style="color: #937499;">tokens</span> 
-                    production declined sharply. For example, items such as <b>badges, pins,</b> and <b>ribbons</b> became more common, 
-                    causing the <span style="color: #8B4E9E;">"Other"</span>  category to rise and become the top category from <b>1966</b>, 
-                    reaching <b>nearly 60%</b> of modern collections. This shift shows how collecting expanded from traditional currency into a much 
-                    wider range of everyday historical objects. The comparison chart highlights this change, with Tokens dominating early 
-                    collections while <span style="color: #8B4E9E;">"Other"</span> becomes dominant in later years.
+                    Early items focused mostly on Royalty and Military themes because older coins and 
+                    stamps were used to show <b>government power</b> and <b>war history</b>.
+                    Modern themes like First Nations and Wildlife only appear in recent years because 
+                    Australia’s values shifted toward <b>celebrating local culture, nature, and community</b>.   
+                </p>  
+                <p>
+                    <br>Before 1901, a shortage of official coins led local shop owners to <b>produce copper tokens</b>, 
+                    which made up over 60% of early collections. After the Australian government <b>introduced official 
+                    currency</b>, private tokens production <b>declined</b> sharply.
                 </p>
             </div>
+
             <div class="pure-u-md-18-24">
                 <div class="pure-g">
+                    <!-- chart 9 -->
+                    <div class="pure-u-md-1-2">
+                        <div class="card" style="margin-left: -15px">
+                            <div class="chart-header" style="margin-bottom: 10px">
+                                <h3>First Nations and Wildlife Themes are Recent</h3>
+                            </div>
+                            <div class="chart" id="vis9" style="font-family: 'Nunito Sans', sans-serif; font-size: 12px; color: #000000;"></div>         
+                        </div>
+                    </div>
+
                     <!-- chart 10 -->
                     <div class="pure-u-md-1-2">
-                        <div class="chart-card">
+                        <div class="card" style="margin-right: -15px">
                             <div class="chart-header" style="margin-bottom: 10px">
-                                <h3>Early Tokens Give Way to Medals and Other Collectibles</h3>
+                                <h3>Early Tokens Give Way to <span style="color: #BF5454;">Medals</span> and <span style="color: #8B4E9E;">Other</span> Collectibles</h3>
                             </div>
                             <div class="chart" id="vis10"></div>         
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- bottom chart-->
+        <div class="pure-g">
+            <div class="pure-u-md-6-24 insight">
+                 <p>
+                    The "Other" category ranked first from 1966 onward, reaching nearly 60% of modern collections.
+                    This reflects a shift towards collecting more <b>everyday items</b>, such as badges, pins, and ribbons, 
+                    rather than focusing mainly on traditional currency.
+                </p>
+            </div>
+
+            <div class="pure-u-md-18-24">
+                <div class="pure-g">
                     <!-- chart 11 -->
-                    <div class="pure-u-md-1-2">
-                        <div class="chart-card">
-                            <div class="chart-header" style="margin-bottom: 10px">
-                                <h3>"Other" Has Ranked First Since 1966</h3>
-                            </div>
-                            <div class="chart" id="vis11"></div>         
+                    <div class="card">
+                        <div class="chart-header" style="margin-bottom: 10px">
+                            <h3><span style="color: #8B4E9E;">"Other"</span> Has Ranked First Since 1966</h3>
                         </div>
+                        <div class="chart" id="vis11"></div>         
                     </div>
                 </div>
             </div>
@@ -342,34 +332,37 @@
 
 
         
-        <!-- section 4: chart & text -->    
-        <h2 class="section-text" id="mintage">🔍 Section 4 - Mintage and Theme</h2>
-        <p class="section-text section-subtitle">&ensp; How coin mintage varies by theme and over time.</p>
+        <!-- section 4: chart & text -->  
+        <div>
+            <p class="section-text">04 · HOW COIN MINTAGE VARIES BY THEME AND OVER TIME.</p>
+            <h2 id="mintage">MINTAGE AND THEME</h2>
+            <p class="section-subtitle">Examining production quantities, analyzing how coin mintage fluctuates across 
+                <br>different themes and historical periods.
+            <p class="divide"></p>
+        </div>
+
 
         <div class="pure-g">
             <div class="pure-u-18-24">
-                <div class="chart-card">
+                <div class="card">
                     <!-- chart 12 -->
                     <div class="chart-header">
                         <h3>Commemorative Coin Mintage Has Fallen Since 1970</h3>  
                     </div> 
-                    <div class="chart" id="vis12"></div>  
+                    <div class="chart" id="vis12" style="font-family: 'Nunito Sans', sans-serif; font-size: 12px; color: #000000;"></div>  
                 </div>
             </div>
             <div class="pure-u-6-24 insight">
                 <p>
-                    Commemorative <span style="color: #FF5C66;">coin</span> production has steadily decreased from <b>1970 to 2024</b>, 
-                    shifting from mass production to smaller, limited-edition releases. Earlier years saw much higher production, 
-                    with <span style="color: #B47CFF;">Military-themed</span> coins reaching about 50 million in <b>1982</b> and 
-                    <span style="color: #FFD1DA;">Royalty-themed</span> coins about 43 million in <b>2001</b>. Since <b>2010</b>, 
-                    most releases have produced fewer than 10 million coins, while themes have become more diverse, 
-                    including <span style="color: #5D4037;"> First Nations</span> and <span style="color: #C1B58F;"> Australian history</span>.
-                
+                    Coin production <b>dropped</b> steadily between 1970 and 2024 because official mints 
+                    <b>stopped making</b> huge batches for everyday money and started making smaller, special 
+                    sets just for collectors. In the past, <b>single issues</b> reached <b>massive numbers</b>, 
+                    such as 49.6 million war coins in 1982 and 43.1 million royalty coins in 2001.
                 </p>
-                <p> 
-                    Overall, Australian commemorative coins have shifted from mass production to more targeted collector releases. 
-                    Production is lower today, while themes are more diverse and culturally representative, 
-                    showing greater focus on specific themes and collector interest.
+                <p>
+                    Overall, Australian commemorative coins have shifted from mass production to more targeted 
+                    collector releases. Production is lower today, while themes are more diverse and culturally 
+                    representative, showing greater focus on specific themes and collector interest.
                 </p>
             </div>
         </div>
@@ -388,8 +381,6 @@
             <span class="flow-pill">3. HISTORICAL</span>
             <span class="arrow">➔</span>
             <span class="flow-pill">4. MINTAGE</span>
-            <span class="arrow">➔</span>
-            <span class="flow-pill current-pill">5. NATIONAL IDENTITY</span>
         </div>
     </div>
 
@@ -400,16 +391,20 @@
         <div class="footer-text">
             <h3>PRESERVE THE PAST. EXPLORE THE PRESENT. VALUE THE STORY.</h3>
             <p>FIT3179 Data Visualisation 2 — Monash University © 2026.</p>
-            <p><em>National Museum of Australia Collection API retrieved on September 2026. 
-                <br>This visualisation was developed using the 
-                <br>National Museum of Australia's Collection API.</em></p> 
+            <p>
+                <b>Author</b> : Zi Ting Mow (34612602)<br>
+                <b>Date created</b>: 21 September 2026
+            </p>    
+
+            <br><p>This visualisation was developed using the <em>National Museum of 
+                <br>Australia's Collection API</em> on September 2026.</p> 
             <p>
                 <b>Explore NMA and RAM Collections online:</b>
                 <a href="https://www.nma.gov.au/explore/collection"> NMA API Explorer</a> |
                 <a href="https://www.ramint.gov.au/collect"> RAM Explorer</a>
             </p>     
         </div>
-        <a href="" class="back-button">BACK TO TOP ↑</a>       
+        <a href="" class="button">BACK TO TOP ↑</a>       
     </div>
 
 </body>

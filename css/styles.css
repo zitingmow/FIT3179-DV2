@@ -6,70 +6,38 @@
 }
 
 html, body {
-    font-family: "Plus Jakarta Sans", Arial;
-    color: #0A1E5C;
-    line-height: 1.5;
     background-color: #F2EEE4;
     margin: 0 auto;
 }
 
-h1 {
-    font-family: "Playfair Display", serif;
-    font-size: 50px;
-    font-weight: 800;
-    font-style: normal;
-    color: #0D2B80;
-    letter-spacing: -2px;
-}
-
-h2 {
-    font-family: "Playfair Display", serif;
-    font-size: 24px;
-    font-weight: 800px;
-    color: #0D2B80;
-    margin-bottom: 0%;
-}
-
-h3 {
-    font-family: "Playfair Display", serif;
-    font-size: 16px;
-    font-weight: 800;
-    color: #0D2B80;
-    letter-spacing: -0.5px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
 
 .content {
     padding: 30px 80px;
 }
 
 
-
 /* ============================================================
    HEADER
 ============================================================ */
 .header {
-    border-bottom: 2px solid #0D2B80;
+    border-bottom: 1px solid #E2C882;
     background-color: #FFECB3;
     position: sticky;                      /* make the header fix when scrolling */
     top: 0;                                /* stick header at the very top of the screen */   
-    z-index:1000;                          /* place header above the page content so the chart don't cover it */
-}
-
-.header-inner {
+    z-index: 1000;                         /* place header above the page content so the chart don't cover it */
+    
     display: flex;   
     flex-wrap: wrap;                       /* drop each sections to next line when full */
     justify-content: space-evenly;         /* distribute the 3 sections evenly */
     align-items: center;
-    gap: 30px;
-    width: 100%;
-    padding: 10px 20px;
+    gap: 50px;
+    padding: 15px 10px;
 }
 
 
-/* ---------- Left flag + title ---------- */
-.header-inner-left {
+
+/* ---------- Left: flag + title ---------- */
+.header-left {
     display: flex;
     align-items: center;
 }
@@ -79,62 +47,64 @@ h3 {
     padding-right: 20px;
 }
 
-.header-inner-left p {
+.header-left h3 {
+    font-family: "Play Fair Display", serif;
+    font-size: 18px;
+    color: #0D2B80
+}
+
+.header-left p {
+    font-family: "Plus Jakarta Sans", sans-serif;
     font-size: 10px;
     font-weight: 800;
     letter-spacing: 1px;
+    line-height: 1px;
     color: rgba(13, 43, 128, 0.8);
 }
 
 
 /* ---------- Middle: 4 links to visualizations ---------- */
-.header-inner-middle {
-    display: flex;            
-    gap: 30px;
-}
 
-.header-inner-middle a {
+.header-middle a {
+    font-family: "Plus Jakarta Sans", sans-serif;
     font-size: 14px;                      
     font-weight: 600;
     letter-spacing: 1px;                
     color: #0D2B80;  
-    text-decoration: none;   /* remove the underline on link */
-    padding-left: 5px;
-    display: inline-block;
+    text-decoration: none;   /* remove default underline on link */
     padding: 8px 14px;
-    border-radius: 8px;
-    white-space: nowrap;
-    transition: background-color 0.2s ease, color 0.2s ease;
+    border-radius: 8px;      /* visible when hover over */
+    transition: background-color 0.2s ease, color 0.2s ease; /* animation time when hover over */
 }
 
-.header-inner-middle a:hover,
-.header-inner-middle a:focus-visible {
+.header-middle a:hover {      /* color animation (blue background & white text) when hover over */
     background-color: #0D2B80;
-    color: #FFFFFF;
 }
 
 
 /* ---------- Right: Navy Button link to visualization ---------- */
-.button, .back-button{
-    font-family: "Plus Jakarta Sans", sans-serif;
+.button {
+    font-family: "Nunito Sans", sans-serif;
     font-size: 12px;
     font-weight: bold;
     color: #FFFFFF;
     text-align: center;
     text-decoration: none;
     letter-spacing: 1px;
+
     border-radius: 30px;
     background-color: #0D2B80;
     padding: 9px 20px;
-    display: inline-flex;
+
+    display: flex;
     justify-content: center;
     align-items: center;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease,
+    transition: transform 0.1s ease, box-shadow 0.1s ease,   /* animation time when hover over */
 }
 
-.button:hover, .back-button:hover {
-    transform: translateY(2px);
-    box-shadow: 4px 5px 0 #FFD54F;      /* bring down animation when hover to the button */
+.button:hover {                       /* bring down animation when hover to the button */
+    transform: translateY(2px);       /* button move down by 2px */
+    box-shadow: 4px 5px 0 #FFD54F;  /* yellow shadow appear beneath*/
 }
 
 
@@ -143,50 +113,35 @@ h3 {
    SUB-HEADER
 ============================================================ */
 /* ---------- SUB-HEADER: two columns ---------- */
-.sub-header-left, .sub-header-right{
+.sub-header{
+    margin-bottom: 2%;
+}
+
+h1 {
+    font-family: "Play Fair Display", serif;
+    font-size: 60px;
+    color: #0D2B80;
+    letter-spacing: -1px;
+    line-height: 80px;
     margin-bottom: 3%;
 }
 
 .sub-header-left p {
+    font-family: "Nunito Sans", Arial;
     font-size: 16px;
     color: #0D2B80;
+    line-height: 1.5;
+    margin-left: 0.5%;
 }
 
-.arch-card{
-    border: 2px solid #0A1E5C;
-    border-radius: 240px 240px 20px 20px;
-    background-color: #FFECB3;
-    padding: 30px 30px;
-    margin-top: 10%;
-    height: 85%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-
-.icon-circle{
+.sub-header-right{
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 74px;
-    height: 74px;
-    margin: 0 auto;
-    border: 2px solid #0D2B80;
-    border-radius: 50%;
-    background-color: #FFFFFF;
-    font-size: 38px;
 }
 
 .arch-img{
-    width: 36px;
-}
-
-.arch-card p{
-    font-size: 11px;
-    color: #0D2B80;
-
+    width: 60px;
 }
 
 
@@ -194,15 +149,39 @@ h3 {
 /* ============================================================
    KPI CARD SECTION
 ============================================================ */
+.card{
+    border: 1px solid #E5DFD3;
+    border-radius: 16px;
+    background-color: #FFFFFF;
+    box-shadow: 0 12px 24px rgba(13, 43, 128, 0.06);
+   
+    padding: 10px 20px;
+    margin-bottom: 3%;
+    
+    display: flex;
+    flex-direction: column;        /* make every element (header, chart, legend) arrange vertically from top to bottom */
+    flex: 1;                       /* every element occupy available space */
+    transition: transform 0.25s ease, box-shadow 0.25s ease; /* animation time when hover over */
+}
+
+
+.card:hover{                                            /* float up animation when hover to the card */
+    transform: translateY(-4px);                        /* card move up by 4px */
+    box-shadow: 0 12px 24px rgba(13, 43, 128, 0.14);  /* grey shadow appear beneath*/
+}   
+
+
 .stats-number {
-    font-family: "Plus Jakarta Sans", sans-serif;
+    font-family: "Nunito Sans", sans-serif;
     font-size: 28px;
     font-weight: bold;
     color: #0D2B80;
     text-align: center;
 }
 
+
 .stats-label {
+    font-family: "Nunito Sans", sans-serif;
     font-size: 14px;
     font-weight: 600;
     color: rgba(12, 43, 128, 0.80);
@@ -212,30 +191,49 @@ h3 {
 
 
 /* ============================================================
-   CHART
+   SECTION
 ============================================================ */
 .section-text {
-    margin-top: 100px;
-    text-align: center;
+    font-family: "Montserrat", sans-serif; 
+    font-weight: 700;
+    font-size: 13px;
+    color: rgba(13, 43, 128, 0.8);
+    letter-spacing: 1px;
+    margin-top: 15%;
+}
+
+
+h2 {
+    font-family: "Spectral", serif;
+    font-size: 35px;
+    font-weight: 800px;
+    color: #0D2B80;
+    margin-top: 0%;
 }
 
 .section-subtitle {
-    font-family: "Plus Jakarta Sans", sans-serif; 
+    font-family: "Nunito Sans", sans-serif; 
     font-size: 14px;
+    font-weight: 500;
     color: rgba(13, 43, 128, 0.8);
-    margin: 10px 2px 30px;
-    display: flex;
-    align-items: center;
+    letter-spacing: 1px;
+    line-height: 1.6;
+    margin-top: -1%;
+    margin-bottom: 3%;
+}
+
+.divide {
+    border-bottom: 2px solid #E5DFD3;
+    margin-top: -1%;
+    margin-bottom: 2%;
 }
 
 
-.section-subtitle::before,
-.section-subtitle::after {
-    flex: 1;
-    border-bottom: 1px dashed #0d2b80;
-    content: "";
-}
 
+
+/* ============================================================
+   CHART
+============================================================ */
 .pure-g {
     margin-left: -12px;
     margin-right: -12px;
@@ -248,26 +246,7 @@ h3 {
     display: flex;
     flex-direction: column;
 }
-
-.chart-card{
-    padding: 10px 20px;
-    margin-bottom: 3%;
-    border: 1px solid #0D2B80;
-    border-radius: 16px;
-    background-color: #FFFFFF;
-    box-shadow: 0 12px 24px rgba(13, 43, 128, 0.06);
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-
-.chart-card:hover{
-    transform: translateY(-4px);                            /*  float up animation when hover to the chard card */
-    box-shadow: 0 12px 24px rgba(13, 43, 128, 0.14);
-}                                                               
-
+                                                            
 
 .chart-header {
     display: flex;
@@ -277,10 +256,13 @@ h3 {
     border-bottom: 1px solid #D5D9E8;
 }
 
-.chart-text {
-    font-size: 13px;
-    font-weight: 400;
-    color: rgba(13, 43, 128, 0.8);   /* navy, slightly see-through */
+h3 {
+    font-family: "Nunito Sans", sans-serif;
+    font-size: 17px;
+    color: #0D2B80;
+    letter-spacing: -0.5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .chart{
@@ -291,14 +273,12 @@ h3 {
 }
 
 .insight{
-    font-family: "Plus Jakarta Sans", sans-serif; 
+    font-family: "Nunito Sans", sans-serif; 
     font-size: 14px;
     color: #000000;
     line-height: 1.5;
     margin-top: -8px;
 }
-
-
 
 
 
@@ -309,12 +289,22 @@ h3 {
 .flow-card {
     width: 100%;
     padding: 30px 20px;
-    margin: 0;
+    margin-top: 5%;
+    margin-bottom: 5%;
     text-align: center;
-    border-top: 2px solid #0D2B80;
-    border-bottom: 2px solid #0D2B80;
+    border-top: 1px solid #E2C882;
+    border-bottom: 1px solid #E2C882;
     background-color: #FFECB3;
 }
+
+.flow-card h2 {
+    font-family: "Playfair Display", serif;
+    font-size: 24px;
+    font-weight: 800px;
+    color: #0D2B80;
+    margin-bottom: 0%;
+}
+
 
 .flow-inner {
    display: flex;
@@ -336,10 +326,6 @@ h3 {
     border: 1px solid #0D2B80;
     border-radius: 30px;
     background-color: #FFFFFF;
-}
-
-.current-pill{
-    background-color: #FAE18F;         
 }
 
 .arrow{
@@ -370,10 +356,23 @@ h3 {
     text-align: left;                       /* ensure text stay left align */
 }
 
+.footer-text h3{
+    font-family: "Playfair Display", serif;
+    font-size: 16px;
+    font-weight: 800;
+    color: #0D2B80;
+    letter-spacing: -0.5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+
 .footer-text p{
+    font-family: "Plus Jakarta Sans", Arial;
+    color: #0D2B80;
     font-size: 13px;
     font-weight: 200;
-    color: #0D2B80;
+    line-height: 1.5;
     margin: 4px 0;
 }
 
