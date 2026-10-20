@@ -4,7 +4,7 @@
         "url": "https://raw.githubusercontent.com/zitingmow/FIT3179-DV2/main/data/nma_collections.csv"
     },
     "width": "container",
-    "height": 320,
+    "height": 300,
     "transform": [
         {"filter": "isValid(datum.category_group) && isValid(datum.era)"},
         {"calculate": "replace(datum.era, /[–—−]/g, '-')", "as": "era_clean"},
@@ -45,11 +45,10 @@
                 "x": {
                     "field": "signed_share",
                     "type": "quantitative",
-                    "title": null,
+                    "title": "Pre-Federation share (%) | Modern share",
                     "axis": {
-                        "labels":false,
-                        "ticks":false,
-                        "domain": false
+                        "labels":true,
+                        "values":[0]
                     },
                     "scale": {
                         "domain": [-100, 100]
@@ -59,11 +58,7 @@
                 "y": {
                     "field": "category_group",
                     "type": "nominal",
-                    "title": "Category",
-                    "axis": {
-                        "ticks":false,
-                        "domain": false
-                    }
+                    "title": "Category"
                 },
                 "color": {
                     "condition": [
@@ -134,8 +129,8 @@
     "config": {
         "view": {"stroke": null},
         "axis": {
-            "titleFont": "Plus Jakarta Sans", "titleFontWeight": "bold", "titlePadding": 10, 
-            "labelFont": "Plus Jakarta Sans", "labelFontSize": 10, "labelPadding": 5,
+            "titleFont": "Plus Jakarta Sans", "titleFontSize": 11, "titlePadding": 10, 
+            "labelFont": "Plus Jakarta Sans", "labelFontSize": 11, "labelPadding": 5,
             "grid": false
         },
         "legend":{

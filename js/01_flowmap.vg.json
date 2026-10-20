@@ -3,11 +3,8 @@
     "width": "container",
     "height": 300,
     "projection": {
-        "type": "mercator",
-        "scale": 90,
-        "center":[-10, 30]
+        "type": "equalEarth"
     },
-    "background": "#AADAFF",
     "data": { "url": "https://raw.githubusercontent.com/zitingmow/FIT3179-DV2/main/data/nma_production_places.csv"},
     "transform": [
         {
@@ -15,12 +12,8 @@
         },
         {
             "aggregate": [
-                {
-                    "op": "count", "as": "records"
-                },
-                {
-                    "op": "min", "field": "place_name", "as": "place"
-                }
+                {"op": "count", "as": "records"},
+                {"op": "min", "field": "place_name", "as": "place"}
             ],
             "groupby": ["latitude", "longitude"]
         },
@@ -29,13 +22,13 @@
     "layer":[
         {
             "data": {
-                "url": "https://raw.githubusercontent.com/zitingmow/FIT3179-DV2/main/js/ne_110m_admin_0_countries.json",
-                "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
+                "sphere": true
             },
-            "mark":{
+            "mark": {
                 "type": "geoshape",
-                "fill": "#E0E0E0",
-                "stroke": "white"
+                "fill": "#AADAFF",
+                "stroke":"grey",
+                "strokeOpacity": 0.3
             }
         },
         {
@@ -46,8 +39,20 @@
             },
             "mark":{
                 "type": "geoshape",
+                "fill": null,
                 "stroke": "grey",
                 "opacity": 0.3
+            }
+        },
+        {
+            "data": {
+                "url": "https://raw.githubusercontent.com/zitingmow/FIT3179-DV2/main/js/ne_110m_admin_0_countries.json",
+                "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
+            },
+            "mark":{
+                "type": "geoshape",
+                "fill": "#E0E0E0",
+                "stroke": "white"
             }
         },
         {

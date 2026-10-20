@@ -4,7 +4,7 @@
         "url": "https://raw.githubusercontent.com/zitingmow/FIT3179-DV2/main/data/commemorative_coins_stamps.csv"
     },
     "width": "container",
-    "height": 300,
+    "height": 350,
     "transform": [
         {"filter": "(datum.type == 'Coin' || datum.type == 'Stamp') && isValid(datum.theme)"},
         {
@@ -43,11 +43,10 @@
                 "x": {
                     "field": "signed_share",
                     "type": "quantitative",
-                    "title": null,
+                    "title": "Coin share (%)       |    Stamp share (%)",
                     "axis": {
-                        "labels":false,
-                        "ticks":false,
-                        "domain": false
+                        "labels":true,
+                        "values":[0]
                     },
                     "scale": {
                         "domain": [-70, 70]
@@ -56,11 +55,7 @@
                 "y": {
                     "field": "theme",
                     "type": "nominal",
-                    "title": "Theme",
-                    "axis": {
-                        "ticks":false,
-                        "domain": false
-                    }
+                    "title": "Theme"
                 },
                 "color": {
                     "condition": [

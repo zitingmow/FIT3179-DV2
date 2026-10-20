@@ -4,52 +4,107 @@
         "url": "https://raw.githubusercontent.com/zitingmow/FIT3179-DV2/main/data/nma_collections.csv"
     },
     "width": "container",
-    "height": 300,
-    "params":[
+    "height": 400,
+     "transform": [
         {
-            "name": "group_highlight",
-            "select": {
-                "type": "point",
-                "fields": ["category_group"],
-                "on": "mouseover",
-                "clear": "mouseout"
+            "aggregate": [{"op": "count", "as":"count"}],
+            "groupby": ["category_group"]
+        },
+        {
+            "window": [{"op": "sum", "field": "count", "as": "total"}],
+            "frame": [null, null]
+        },
+        {
+            "calculate": "format(datum.count / datum.total * 100, '.1f') + '%'",
+            "as": "percentage_label"
+        }
+    ],
+    "layer":[
+        {
+            "params":[
+                {
+                    "name": "highlight",
+                    "select": {
+                        "type": "point",
+                        "fields": ["category_group"],
+                        "on": "mouseover",
+                        "clear": "mouseout"
+                    }
+                }
+            ],
+            "mark": {
+                "type": "arc",
+                "innerRadius": 90,
+                "color": "#FFFFFF",
+                "stroke": "white"
+            },
+            "encoding": {
+                "theta": {
+                    "field": "count",
+                    "type": "quantitative",
+                    "stack": true
+                },
+                "color": {
+                    "condition": [
+                        {
+                            "test": "datum.category_group == 'Medals'",
+                            "value": "#BF5454"
+                        },
+                        {
+                            "test": "datum.category_group == 'Tokens'",
+                            "value": "#937499"
+                        },
+                        {
+                            "test": "datum.category_group == 'Other'",
+                            "value": "#8B4E9E"
+                        }
+                    ],
+                    "value": "#D1D1D1"
+                },
+
+                "order":{
+                    "field": "count",
+                    "type": "quantitative",
+                    "sort": "ascending"
+                },
+                "opacity": {
+                    "condition": {"param": "highlight", "value": 1},
+                    "value": 0.6
+                },
+                "tooltip": [
+                    {"field": "category_group", "type": "nominal", "title": "Category"},
+                    {"field": "count", "type": "quantitative", "title": "Items"},
+                    {"field": "percentage_label", "type": "nominal", "title": "Percentage (%)"}
+                ]
+            }
+        },
+        {
+            "mark": {
+                "type": "text",
+                "radius": 150,
+                "fontSize": 11,
+                "fill": "#000000",
+                "align": "center",
+                "baseline": "middle"
+            },
+            "encoding": {
+                "theta":{
+                    "field":"count",
+                    "type": "quantitative",
+                    "stack": true
+                },
+                "order":{
+                    "field": "count",
+                    "type": "quantitative",
+                    "sort": "ascending"
+                },
+                "text":{
+                    "field": "percentage_label",
+                    "type": "nominal"
+                }
             }
         }
     ],
-    "mark":{
-        "type": "arc",
-        "innerRadius": 70,
-        "color": "#FFFFFF"
-    },
-    "encoding": {
-        "theta": {
-            "aggregate": "count",
-            "type": "quantitative",
-            "title": "Number of items"
-        },
-        "color": {
-            "field": "category_group",
-            "type": "nominal",
-            "title": "Category",
-            "scale":{
-                "domain": ["Banknotes", "Coins", "Medals", "Stamps", "Tokens", "Other"],
-                "range": ["#D95CB5","#FF5C66","#BF5454","#FF8A54","#937499","#8B4E9E"]
-            }
-        },
-        "order":{
-            "aggregate": "count",
-            "type": "quantitative",
-            "sort": "ascending"
-        },
-        "opacity": {
-            "condition": {"param": "group_highlight", "value": 1}, 
-            "value": 0.6
-        },
-        "tooltip": [
-            {"field": "category_group", "type": "nominal", "title": "Category"},
-            {"aggregate": "count", "type": "quantitative", "title": "Items"}
-        ]
-    },
     "config":{
         "view": { "stroke": null},
         "legend": {

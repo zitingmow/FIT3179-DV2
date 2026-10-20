@@ -4,8 +4,8 @@
         "url": "https://raw.githubusercontent.com/zitingmow/FIT3179-DV2/main/data/commemorative_coins_stamps.csv"
     },
     "width": "container",
-    "height": 300,
-        "params": [
+    "height": 250,
+    "params": [
         {
             "name": "Theme_selection",
             "bind": {
@@ -69,6 +69,35 @@
             }
         },
         {
+            "transform": [
+                {
+                    "aggregate": [{"op": "median", "field": "mintage", "as": "median_mintage"}],
+                    "groupby": ["year"]
+                }
+            ],
+            "mark": {
+                "type": "line",
+                "color": "#E65100",
+                "strokeWidth": 2,
+                "strokeDash": [4, 4]
+            },
+            "encoding": {
+                "x": {
+                    "field": "year",
+                    "type": "quantitative"
+                },
+                "y": {
+                    "field": "median_mintage",
+                    "type": "quantitative"
+                },
+                "tooltip": [
+                    {"field": "year", "type": "quantitative", "title": "Year", "format": "d"},
+                    {"field": "median_mintage", "type": "quantitative", "title": "Median Mintage", "format": ",.1f"}
+                ]
+                
+            }
+        },
+        {
             "mark": {
                 "type": "point",
                 "filled": true,
@@ -83,7 +112,6 @@
                     "axis": {
                         "format": "d",
                         "tickCount": 5
-                        
                     }
                 },
                 "y": {
@@ -122,8 +150,8 @@
     "config":{
         "view":{"stroke":null},
         "axis": {
-            "titleFont": "Plus Jakarta Sans", "titleFontWeight": "bold", "titlePadding": 10, 
-            "labelFont": "Plus Jakarta Sans", "labelFontSize": 10, "labelPadding": 5,
+            "titleFont": "Plus Jakarta Sans", "titleFontSize": 11, "titlePadding": 10, 
+            "labelFont": "Plus Jakarta Sans", "labelFontSize": 11, "labelPadding": 5,
             "grid": false
         },
         "legend":{

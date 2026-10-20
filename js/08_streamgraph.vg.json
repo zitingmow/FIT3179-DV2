@@ -2,21 +2,47 @@
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "data": {"url": "https://raw.githubusercontent.com/zitingmow/FIT3179-DV2/main/data/nma_collections.csv"},
     "width": "container",
-    "height": 250,
+    "height": 300,
     "params": [
+        {
+            "name": "Category_selection",
+            "bind": {
+                "input": "select",
+                "options": [
+                    null,
+                    "Banknotes",
+                    "Coins",
+                    "Medals",
+                    "Stamps",
+                    "Tokens",
+                    "Other"
+                ],
+            "labels": [
+                    "Show All",
+                    "Banknotes",
+                    "Coins",
+                    "Medals",
+                    "Stamps",
+                    "Tokens",
+                    "Other"
+                ],
+                "name": "Cetegory Selection: "
+            }
+        },
         {
             "name": "Year_filter",
             "value": 0,
             "bind": {
                 "input": "range",
                 "min": 1750,
-                "max": 2022,
+                "max": 2010,
                 "step": 1,
                 "name": "Year Selection: "
             }
         }
     ],
     "transform": [
+        {"filter": "Category_selection == null || datum.category_group == Category_selection"},
         {"filter": "datum.year != null && datum.year > 1700"},
         {"filter": "datum.year > Year_filter"}
     ],
@@ -51,12 +77,12 @@
     "config":{
         "view": { "stroke": null},
         "axis": {
-            "titleFont": "Plus Jakarta Sans", "titleFontWeight": "bold", "titlePadding": 10, 
-            "labelFont": "Plus Jakarta Sans", "labelFontSize": 10, "labelPadding": 5,
+            "titleFont": "Plus Jakarta Sans", "titleFontSize": 11, "titlePadding": 10, 
+            "labelFont": "Plus Jakarta Sans", "labelFontSize": 11, "labelPadding": 5,
             "grid": false
         },
         "legend": {
-            "orient": "bottom",
+            "orient": "right",
             "titleFont": "Plus Jakarta Sans", "titleFontSize": 10, "titleColor":"#0D2B80",
             "labelFont": "Plus Jakarta Sans", "labelFontSize": 9, "labelColor":"#0D2B80",
             "symbolSize": 100
