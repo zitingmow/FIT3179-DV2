@@ -62,7 +62,7 @@
             "aggregate" : "count",
             "type" : "quantitative",
             "stack" : "center",
-            "title": "Number of Recorded Collectibles"
+            "title": "No. of Collectibles"
         },
         "color": {
             "field": "category_group",
