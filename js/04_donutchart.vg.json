@@ -60,7 +60,6 @@
                     ],
                     "value": "#D1D1D1"
                 },
-
                 "order":{
                     "field": "count",
                     "type": "quantitative",
@@ -99,6 +98,24 @@
                 "text":{
                     "field": "percentage_label",
                     "type": "nominal"
+                }
+            }
+        },
+        {
+            "description": "Placeholder for legend",
+            "mark": {
+                "type": "circle",
+                "opacity": 0
+            },
+            "encoding": {
+                "color": {
+                    "field": "category_group",
+                    "type": "nominal",
+                    "title": "Category",
+                    "scale": {
+                        "domain": ["Medals", "Tokens", "Other"],
+                        "range": ["#BF5454", "#937499", "#8B4E9E"]
+                    }
                 }
             }
         }
