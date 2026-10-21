@@ -8,6 +8,7 @@
 html, body {
     background-color: #F2EEE4;
     margin: 0 auto;
+    overflow-x: hidden; /* clips anything overflow */
 }
 
 
