@@ -77,7 +77,7 @@
             {"field": "material_family","title": "Material Family"},
             {"field": "records","title": "Records","format": "d"},
             {"field": "category_total","title": "Category Total","format": "d"},
-            {"field": "percent","title": "%","format": ".1f"}
+            {"field": "percent","title": "Share of collectibles (%)","format": ".1f"}
         ]
     },
     "config": {

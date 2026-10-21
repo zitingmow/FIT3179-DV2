@@ -116,10 +116,7 @@
                 },
                 "y": {
                     "field": "mintage",
-                    "type": "quantitative",
-                    "axis": {
-                        "tickCount": 5
-                    }
+                    "type": "quantitative"
                 },
                 "color" : {
                     "field": "theme",

@@ -6,13 +6,17 @@
     "width": "container",
     "height": 300,
     "transform": [
-        {"filter": "isValid(datum.category_group) && isValid(datum.era)"},
+        {
+            "filter": "isValid(datum.category_group) && isValid(datum.era)"
+        },
         {"calculate": "replace(datum.era, /[–—−]/g, '-')", "as": "era_clean"},
         {
             "calculate": "datum.era_clean == 'Pre-1788' || datum.era_clean == '1788-1900' ? 'Pre-Federation' : test(/^(1966|2000|2010|2020)/, datum.era_clean) ? 'Modern' : null",
             "as": "period" 
         },
-        {"filter": "isValid(datum.period)"},
+        {
+            "filter": "isValid(datum.period)"
+        },
         {
             "aggregate": [{"op": "count", "as": "records"}],
             "groupby": ["category_group", "period"]
@@ -77,7 +81,7 @@
                     {"field": "category_group", "type": "nominal", "title": "Category"},
                     {"field": "period", "type": "nominal", "title": "Period"},
                     {"field": "share_label", "type": "nominal", "title": "Share of period records (%)"},
-                    {"field": "records", "type": "quantitative", "title": "NMA records", "format": ",.0f"}
+                    {"field": "records", "type": "quantitative", "title": "Records", "format": ",.0f"}
                 ]
             }
         },

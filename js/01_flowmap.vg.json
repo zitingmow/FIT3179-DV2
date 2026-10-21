@@ -17,7 +17,10 @@
             ],
             "groupby": ["latitude", "longitude"]
         },
-        {"calculate": "{type: 'LineString', coordinates: [[datum.longitude, datum.latitude], [149.13, -35.28]]}", "as": "line"}
+        {
+            "calculate": "{type: 'LineString', coordinates: [[datum.longitude, datum.latitude], [149.13, -35.28]]}", 
+            "as": "line"
+        }
     ],
     "layer":[
         {

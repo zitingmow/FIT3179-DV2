@@ -6,7 +6,9 @@
     "width": "container",
     "height": 200,
     "transform": [
-        {"filter": "isValid(datum.era) && datum.era != \"Unknown\" && isValid(datum.category_group)"},
+        {
+            "filter": "isValid(datum.era) && datum.era != \"Unknown\" && isValid(datum.category_group)"
+        },
         {
             "aggregate":[{"op": "count", "as": "records"}],
             "groupby":["era", "category_group"]
@@ -15,7 +17,10 @@
             "joinaggregate":[{"op": "sum", "field": "records", "as": "era_total"}],
             "groupby":["era"]
         },
-        {"calculate": "datum.records / datum.era_total * 100", "as": "share"},
+        {
+            "calculate": "datum.records / datum.era_total * 100", 
+            "as": "share"
+        },
         {
             "calculate": "datum.era == 'Pre-1788' ? 0 : datum.era == '1788-1900' ? 1: datum.era == '1901-1965' ? 2: datum.era == '1966-1999' ? 3: datum.era == '2000-2009' ? 4: datum.era == '2010-2019' ? 5: 6",
             "as": "era_order"
@@ -65,14 +70,10 @@
                 "y": {
                     "field": "rank",
                     "type": "quantitative",
-                    "title": null,
+                    "title": "Rank",
                     "scale": {
                         "domain": [1,5],
                         "reverse": true
-                    },
-                    "axis":{
-                        "title": "Rank",
-                        "tickMinStep": 1
                     }
                 },
                 "color": {
@@ -84,8 +85,8 @@
                         "range": ["#F5C2FF", "#BF5454", "#8B4E9E"]
                     },
                     "condition": {
-                    "test": "datum.category_group != 'Tokens' && datum.category_group != 'Medals' && datum.category_group != 'Other'",
-                    "value": "#D1D1D1"
+                        "test": "datum.category_group != 'Tokens' && datum.category_group != 'Medals' && datum.category_group != 'Other'",
+                        "value": "#D1D1D1"
                     }
                 },
                 "opacity": {
@@ -96,7 +97,7 @@
                     {"field": "era", "title": "Era"},
                     {"field": "category_group", "title": "Category group"},
                     {"field": "rank", "title": "Rank", "format": "d"},
-                    {"field": "records", "title": "NMA records", "format": "d"},
+                    {"field": "records", "title": "Records", "format": "d"},
                     {"field": "share", "title": "Share within era (%)", "format": ".1f"}
                 ]
             }

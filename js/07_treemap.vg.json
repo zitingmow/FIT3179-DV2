@@ -13,11 +13,11 @@
         },
         {
             "calculate": "datum.collection_grouped === 'Timothy Millett collection' ? 0 : datum.collection_grouped === 'Cecil Ballard Jnr collection' ? 0.52 : datum.collection_grouped === 'David Allen medals collection' ? 0.52 : datum.collection_grouped === 'William and Jeanette Derham Family - Bendigo Pottery collection' ? 0.77 : datum.collection_grouped === 'Gary Whipp collection' ? 0.52 : datum.collection_grouped === 'Governor-General collection' ? 0.77 : datum.collection_grouped === 'Diana Mary Bates collection' ? 0.52 : datum.collection_grouped === 'Springfield - Faithfull Family collection' ? 0.65 : datum.collection_grouped === 'J B Young Ltd collection' ? 0.78 : datum.collection_grouped === 'ACT Milk Authority collection' ? 0.89 : 0.52", 
-            "as": "final_fx"
+            "as": "x"
         },
         {
             "calculate": "datum.collection_grouped === 'Timothy Millett collection' ? 0.49 : datum.collection_grouped === 'Cecil Ballard Jnr collection' ? 1.0 : datum.collection_grouped === 'David Allen medals collection' ? 0.75 : datum.collection_grouped === 'William and Jeanette Derham Family - Bendigo Pottery collection' ? 1.0 : datum.collection_grouped === 'Gary Whipp collection' ? 0.75 : datum.collection_grouped === 'Governor-General collection' ? 1.0 : datum.collection_grouped === 'Diana Mary Bates collection' ? 0.63 : datum.collection_grouped === 'Springfield - Faithfull Family collection' ? 0.76 : datum.collection_grouped === 'J B Young Ltd collection' ? 0.87 : datum.collection_grouped === 'ACT Milk Authority collection' ? 1.0 : 1.0", 
-            "as": "fx2"
+            "as": "x2"
         },
         {
             "calculate": "datum.collection_grouped === 'Timothy Millett collection' ? 0 : datum.collection_grouped === 'Cecil Ballard Jnr collection' ? 0 : datum.collection_grouped === 'David Allen medals collection' ? 0.38 : datum.collection_grouped === 'William and Jeanette Derham Family - Bendigo Pottery collection' ? 0.38 : datum.collection_grouped === 'Gary Whipp collection' ? 0.62 : datum.collection_grouped === 'Governor-General collection' ? 0.62 : datum.collection_grouped === 'Diana Mary Bates collection' ? 0.82 : datum.collection_grouped === 'Springfield - Faithfull Family collection' ? 0.82 : datum.collection_grouped === 'J B Young Ltd collection' ? 0.82 : datum.collection_grouped === 'ACT Milk Authority collection' ? 0.82 : 0", 
@@ -28,7 +28,7 @@
             "as": "y2"
         },
         {
-            "calculate": "(datum.final_fx + datum.fx2) / 2",
+            "calculate": "(datum.x + datum.x2) / 2",
             "as":"x_mid"
         },
         {
@@ -36,7 +36,7 @@
             "as":"y_mid"
         },
         {
-            "calculate": "datum.collection_grouped === 'Springfield - Faithfull Family collection' ? 'Faithfull Family' : replace(datum.collection_grouped, /\\s*collection$/i, '')",
+            "calculate": "datum.collection_grouped === 'Springfield - Faithfull Family collection' ? 'Faithfull Family' : datum.collection_grouped === 'William and Jeanette Derham Family - Bendigo Pottery collection' ? 'William & Jeanette Derham Family' : replace(datum.collection_grouped, /\\s*collection$/i, '')",
             "as": "label_name"
         }
     ],
@@ -59,8 +59,8 @@
                 "strokeWidth": 1.5
             },
             "encoding": {
-                "x": {"field": "final_fx", "type": "quantitative", "axis": null},
-                "x2": {"field": "fx2"},
+                "x": {"field": "x", "type": "quantitative", "axis": null},
+                "x2": {"field": "x2"},
                 "y": {"field": "y", "type": "quantitative", "axis": null},
                 "y2": {"field": "y2"},
                 "color": {
@@ -91,9 +91,7 @@
                 "type": "text",
                 "font": "Plus Jakarta Sans",
                 "fontSize": 10,
-                "baseline": "middle",
-                "align": "center",
-                "limit": 90
+                "align": "center"
             },
             "encoding": {
                 "x": {"field": "x_mid", "type": "quantitative"},

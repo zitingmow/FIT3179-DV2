@@ -41,8 +41,7 @@
             "encoding": {
                 "theta": {
                     "field": "count",
-                    "type": "quantitative",
-                    "stack": true
+                    "type": "quantitative"
                 },
                 "color": {
                     "condition": [
@@ -84,8 +83,7 @@
                 "radius": 150,
                 "fontSize": 11,
                 "fill": "#000000",
-                "align": "center",
-                "baseline": "middle"
+                "align": "center"
             },
             "encoding": {
                 "theta":{

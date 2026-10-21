@@ -36,8 +36,7 @@
             "title": "Issue year",
             "scale": {"domain": [1960, 2030]},
             "axis": {
-                "format": "d",
-                "tickCount": 5
+                "format": "d"
             }
         },
         "y":{
@@ -57,8 +56,6 @@
                 "domain": ["Coin", "Stamp"],
                 "range": ["#FF5C66", "#FF8A54"]
             }
-
-            
         },
         "tooltip": [
             {"field": "title", "type": "nominal", "title": "Issue"},

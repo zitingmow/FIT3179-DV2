@@ -39,7 +39,7 @@
         }
     ],
     "projection": {
-        "type": "equirectangular",
+        "type": "mercator",
         "center": {"expr": "center_to"},
         "scale": {"expr": "zoom_level"}
     },
@@ -49,11 +49,6 @@
                 "url": "https://raw.githubusercontent.com/zitingmow/FIT3179-DV2/main/js/STE_2026_AUST_GDA2020.json",
                 "format": {"type": "topojson", "feature": "STE_2026_AUST_GDA2020"}
             },
-            "transform": [
-                {
-                    "filter": "datum.properties.AUS_CODE26 == 'AUS'"
-                }
-            ],
             "mark":{
                 "type": "geoshape",
                 "fill": "#E0E0E0",

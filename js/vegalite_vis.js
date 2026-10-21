@@ -1,5 +1,11 @@
 var vg_1 ="js/01_flowmap.vg.json"
-vegaEmbed("#vis1", vg_1, { "actions": false }).then(function(result) {}).catch(console.error)
+vegaEmbed(
+    "#vis1", vg_1, // find the html element with matching id
+    { "actions": false }  // hide vega embed action menu
+    )
+    .then(function(result) {} // action perform after the chart successfully loaded
+    )
+    .catch(console.error) // print error if the embedding fail
 
 var vg_2 ="js/02_choroplethmap.vg.json"
 vegaEmbed("#vis2", vg_2, { "actions": false }).then(function(result) {}).catch(console.error)

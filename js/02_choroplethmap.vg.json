@@ -40,7 +40,9 @@
             "as": "geo"
         }
     ],
-    "mark": {"type": "geoshape"},
+    "mark": {
+        "type": "geoshape"
+    },
     "encoding": {
         "shape": {
             "field": "geo",
@@ -57,7 +59,7 @@
         },
          "tooltip": [
             {"field": "state_from_place_name", "type": "nominal", "title": "State or territory"},
-            {"field": "place_records", "type": "quantitative", "title": "Production-place records", "format": ",.0f"},
+            {"field": "place_records", "type": "quantitative", "title": "Production records", "format": ",.0f"},
             {"field": "% of records", "type": "quantitative", "title": "% of collectibles", "format": ".1f"}
         ]
     },

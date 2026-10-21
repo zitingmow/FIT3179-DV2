@@ -3,7 +3,7 @@
 <head>
     <title>FIT3179 Data Visualisation 2</title>
 
-    <!-- Import Pure.css library, allow stacked of elements when screen size is small-->
+    <!-- Import Pure.css library -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-responsive-min.css">
 
@@ -103,8 +103,6 @@
         <div id="geographic">
             <p class="section-text">01 · WHERE COLLECTIBLES WERE MADE, COLLECTED AND MOVED</p>
             <h2>GEOGRAPHIC & SPATIAL PROVENANCE</h2>
-            <p class="section-subtitle"> Exploring the spatial distribution, manufacturing origins, and geographic 
-                <br> of cultural heritage objects across historical collections.</p>
             <p class="divide"></p>
         </div>
 
@@ -125,7 +123,7 @@
             <div class="pure-u-md-18-24">
                 <!-- chart 1 -->
                 <div class="card">
-                    <div class="chart-header">
+                    <div class="chart-divide">
                         <h3>Northern Europe is Australia's Main Overseas Collectible Origin</h3>
                     </div> 
                     <div class="chart" id="vis1"></div>
@@ -137,7 +135,7 @@
             <div class="pure-u-md-1-2">
                 <!-- chart 2 -->
                 <div class="card">
-                    <div class="chart-header">
+                    <div class="chart-divide">
                         <h3>Victoria Holds About Half of Collectible Records</h3>
                     </div>
                     <div class="chart" id="vis2"></div>     
@@ -147,7 +145,7 @@
             <div class="pure-u-md-1-2">
                 <!-- chart 3 -->
                 <div class="card">
-                    <div class="chart-header">
+                    <div class="chart-divide">
                         <h3>Melbourne and Canberra Lead Production Hubs</h3>
                     </div> 
                     <div class="chart" id="vis3" style="font-family: 'Nunito Sans', sans-serif; font-size: 12px; color: #000000;"></div>
@@ -158,21 +156,18 @@
 
 
 
-        <!-- section 2: chart & text -->
-        <div>
+        <!-- SECTION 2: chart & text -->
+        <div id="category">
             <p class="section-text">02 · WHAT THE COLLECTION HOLDS, FROM MATERIALS TO THEMES</p>
-            <h2 id="category">COLLECTION AND COMMEMORATIVE PROFILES</h2>
-            <p class="section-subtitle"> A comprehensive breakdown of collection contents, analyzing the spectrum 
-                <br> of physical materials and thematic categories.</p>
+            <h2>COLLECTION AND COMMEMORATIVE PROFILES</h2>
             <p class="divide"></p>
         </div>
 
-        <!-- top chart -->
          <div class="pure-g">
-            <!-- chart 4 -->
             <div class="pure-u-md-18-24">
+                <!-- chart 4 -->
                 <div class="card">
-                    <div class="chart-header">
+                    <div class="chart-divide">
                         <h3><span style="color: #BF5454;">Medals</span> and <span style="color: #8B4E9E;">Other</span> are the Main Collection</h3>   
                     </div> 
                     <div class="chart" id="vis4"></div>         
@@ -194,22 +189,21 @@
             </div>
         </div>
 
-        <!-- middle chart -->
         <div class="pure-g">
-            <!-- chart 5 -->
             <div class="pure-u-md-1-2">
+                <!-- chart 5 -->
                 <div class="card">
-                    <div class="chart-header">
+                    <div class="chart-divide">
                         <h3>Metal Dominates <span style="color: #FF5C66;">Coins</span>, <span style="color: #BF5454;">Medals</span> and <span style="color: #937499;">Tokens</span></h3>     
                     </div> 
                     <div class="chart" id="vis5"></div>         
                 </div>
             </div>
             
-            <!-- chart 6 -->
             <div class="pure-u-md-1-2">
+                <!-- chart 6 -->
                 <div class="card">
-                        <div class="chart-header">
+                        <div class="chart-divide">
                             <h3>Royalty Leads <span style="color: #FF5C66;">Coins</span>, Military Leads <span style="color: #FF8A54;">Stamps</span></h3>   
                         </div> 
                         <div class="chart" id="vis6"></div>         
@@ -217,10 +211,9 @@
             </div>
         </div>
 
-        <!-- bottom chart -->
         <!-- chart 7 -->
         <div class="pure card">
-            <div class="chart-header">
+            <div class="chart-divide">
                 <h3>Private Collections Dominated by Timothy & Cecil</h3>
             </div> 
             <div class="chart" id="vis7"></div>            
@@ -229,16 +222,14 @@
 
 
             
-        <!-- section 3: chart & text--> 
-        <div>
+
+        <!-- SECTION 3: chart & text--> 
+        <div id="era">
             <p class="section-text">03 · HOW COLLECTING HAS CHANGED ACROSS AUSTRALIAN HISTORY</p>
-            <h2 id="era">CHANGE ACROSS TIME AND ERAS</h2>
-            <p class="section-subtitle">Tracing how what we collect and how we preserve it 
-                <br>has shifted across key historical eras in Australia.</p>
+            <h2>CHANGE ACROSS TIME AND ERAS</h2>
             <p class="divide"></p>
         </div>
 
-        <!-- top chart -->
         <div class="pure-g">
             <div class="pure-u-md-6-24 insight">
                 <p>Old tokens show up early in the 1800s but disappear because people 
@@ -256,7 +247,7 @@
                 <div class="pure-g">
                     <!-- chart 8 -->
                     <div class="card">
-                        <div class="chart-header" style="margin-bottom: 10px">
+                        <div class="chart-divide" style="margin-bottom: 10px">
                             <h3>Collecting Surges Spike Around 1935, 1960 and 1987</h3>
                         </div>
                         <div class="chart" id="vis8" style="font-family: 'Nunito Sans', sans-serif; font-size: 12px; color: #000000;"></div>         
@@ -265,8 +256,6 @@
             </div>
         </div>
 
-
-        <!-- middle chart -->
         <div class="pure-g">
             <div class="pure-u-md-6-24 insight">
                 <p>
@@ -284,20 +273,20 @@
 
             <div class="pure-u-md-18-24">
                 <div class="pure-g">
-                    <!-- chart 9 -->
                     <div class="pure-u-md-1-2">
+                        <!-- chart 9 -->
                         <div class="card" style="margin-left: -15px">
-                            <div class="chart-header" style="margin-bottom: 10px">
+                            <div class="chart-divide" style="margin-bottom: 10px">
                                 <h3>First Nations and Wildlife Themes are Recent</h3>
                             </div>
                             <div class="chart" id="vis9" style="font-family: 'Nunito Sans', sans-serif; font-size: 12px; color: #000000;"></div>         
                         </div>
                     </div>
 
-                    <!-- chart 10 -->
                     <div class="pure-u-md-1-2">
+                        <!-- chart 10 -->
                         <div class="card" style="margin-right: -15px">
-                            <div class="chart-header" style="margin-bottom: 10px">
+                            <div class="chart-divide" style="margin-bottom: 10px">
                                 <h3>Early Tokens Give Way to <span style="color: #BF5454;">Medals</span> and <span style="color: #8B4E9E;">Other</span> Collectibles</h3>
                             </div>
                             <div class="chart" id="vis10"></div>         
@@ -307,7 +296,6 @@
             </div>
         </div>
 
-        <!-- bottom chart-->
         <div class="pure-g">
             <div class="pure-u-md-6-24 insight">
                  <p>
@@ -321,7 +309,7 @@
                 <div class="pure-g">
                     <!-- chart 11 -->
                     <div class="card">
-                        <div class="chart-header" style="margin-bottom: 10px">
+                        <div class="chart-divide" style="margin-bottom: 10px">
                             <h3><span style="color: #8B4E9E;">"Other"</span> Has Ranked First Since 1966</h3>
                         </div>
                         <div class="chart" id="vis11"></div>         
@@ -331,22 +319,21 @@
         </div>
 
 
-        
-        <!-- section 4: chart & text -->  
-        <div>
+
+
+
+        <!-- SECTION 4: chart & text -->  
+        <div id="mintage">
             <p class="section-text">04 · HOW COIN MINTAGE VARIES BY THEME AND OVER TIME.</p>
-            <h2 id="mintage">MINTAGE AND THEME</h2>
-            <p class="section-subtitle">Examining production quantities, analyzing how coin mintage fluctuates across 
-                <br>different themes and historical periods.
+            <h2>MINTAGE AND THEME</h2>
             <p class="divide"></p>
         </div>
-
 
         <div class="pure-g">
             <div class="pure-u-18-24">
                 <div class="card">
                     <!-- chart 12 -->
-                    <div class="chart-header">
+                    <div class="chart-divide">
                         <h3>Commemorative Coin Mintage Has Fallen Since 1970</h3>  
                     </div> 
                     <div class="chart" id="vis12" style="font-family: 'Nunito Sans', sans-serif; font-size: 12px; color: #000000;"></div>  
@@ -367,6 +354,7 @@
             </div>
         </div>
     </div>
+
 
 
 
