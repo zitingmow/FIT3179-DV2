@@ -90,7 +90,7 @@
             "mark": {
                 "type": "text",
                 "font": "Plus Jakarta Sans",
-                "fontSize": 10,
+                "fontSize": 13,
                 "align": "center"
             },
             "encoding": {
