@@ -12,8 +12,6 @@
                 "input": "select",
                 "options": [
                     null,
-                    "Arts & Culture",
-                    "Australian History",
                     "Environment",
                     "First Nations",
                     "Military",
@@ -23,8 +21,6 @@
                 ],
                 "labels": [
                     "Show All",
-                    "Arts & Culture",
-                    "Australian History",
                     "Environment",
                     "First Nations",
                     "Military",
@@ -37,6 +33,7 @@
         }
     ],
     "transform": [
+        {"filter": "datum.theme != 'Arts & Culture' && datum.theme != 'Australian History'"},
         {"filter": "datum.type == 'Coin' && isValid(datum.year) && isValid(datum['mintage (millions)'])"},
         {"calculate": "toNumber(datum['mintage (millions)'])", "as": "mintage"},
         {"filter": "Theme_selection == null || datum.theme == Theme_selection"}
@@ -124,14 +121,12 @@
                     "title": "Theme",
                     "scale": {
                         "range": [
-                            "#E3DAC9",
                             "#C1B58F",
                             "#A6F7F8",
                             "#5D4037",
                             "#B47CFF",
                             "#FFD1DA",
-                            "#828282",
-                            "#C0C0C0"
+                            "#828282"
                         ]
                     }
                 },

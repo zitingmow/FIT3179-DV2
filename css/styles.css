@@ -238,10 +238,10 @@ h2 {
                                                             
 
 h3 {
-    font-family: "Nunito Sans", sans-serif;
-    font-size: 17px;
+    font-family: "Play Fair Display", serif;
+    font-size: 18px;
     color: #0D2B80;
-    letter-spacing: -0.5px;
+    letter-spacing: 0px;
     margin-top: 10px;
     margin-bottom: 10px;
 }
@@ -326,7 +326,7 @@ h3 {
     background-color: #FAE18F;     
 
     width: 100%;
-    margin-top: 40px;                        /* space between cycle and footer */
+    margin-top: 80px;                        /* space between cycle and footer */
     padding: 30px 40px;    
 
     display: flex;                           /* text on the left, button on the right */
